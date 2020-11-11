@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # publish this package
+# Run this from the package's root directory.
 
 ## Define the release
 

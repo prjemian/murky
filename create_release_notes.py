@@ -2,6 +2,8 @@
 
 """
 Create release notes for a new release of a GitHub repository.
+
+Run this from the package's root directory.
 """
 
 # Requires:
