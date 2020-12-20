@@ -203,8 +203,10 @@ def report(title, repo, milestone, tags, pulls, issues, commits):
     print(f"## {title}")
     print("")
     print(f"* **date/time**: {datetime.datetime.now()}")
-    print("* **release**: ")
-    print("* **documentation**: [PDF]()")
+    # just a suggestion, the latest release
+    rr = repo.get_releases()
+    print(f"* **release**: [{rr[0].tag_name}]({rr[0].html_url})")
+    print(f"* **documentation**: {repo.homepage}")
     if milestone is not None:
         print(f"* **milestone**: [{milestone.title}]({milestone.url})")
         print("")
@@ -244,9 +246,12 @@ def report(title, repo, milestone, tags, pulls, issues, commits):
         print("-" * 5, " | ", "-" * 5, " | ", "-" * 5, " | ", "-" * 5)
         for k, pull in sorted(pulls.items(), reverse=True):
             state = {True: "merged", False: "closed"}[pull.merged]
-            when = str2time(pull.last_modified).strftime("%Y-%m-%d")
+            when = pull.closed_at.isoformat(sep=" ").split()[0]
             print(
-                f"[#{pull.number}]({pull.html_url}) | {when} | {state} | {pull.title}"
+                f"[#{pull.number}]({pull.html_url})"
+                f" | {when}"
+                f" | {state}"
+                f" | {pull.title}"
             )
     print("")
     print("### Issues")
