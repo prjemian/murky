@@ -266,8 +266,8 @@ def report(title, repo, milestone, tags, pulls, issues, commits):
             logger.debug("[closed: %s] %d %s", v.closed_at, k, v.title)
             return v.closed_at
 
-        print("issue | date | state | label(s) | title")
-        print(hbar, " | ", hbar, " | ", hbar, " | ", hbar, " | ", hbar)
+        print("issue | date | label(s) | title")
+        print(hbar, " | ", hbar, " | ", hbar, " | ", hbar)
         for k, issue in sorted(issues.items(), key=isorter, reverse=True):
             if k not in pulls:
                 when = issue.closed_at.strftime("%Y-%m-%d")
@@ -275,7 +275,6 @@ def report(title, repo, milestone, tags, pulls, issues, commits):
                 print(
                     f"[#{issue.number}]({issue.html_url})"
                     f" | {when}"
-                    f" | {issue.state}"
                     f" | {labels}"
                     f" | {issue.title}"
                 )
