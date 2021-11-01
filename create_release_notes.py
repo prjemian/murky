@@ -200,18 +200,19 @@ def str2time(time_string):
 
 
 def report(title, repo, milestone, tags, pulls, issues, commits):
+    hbar = "-" * 3
     print(f"## {title}")
     print("")
     print(f"* **date/time**: {datetime.datetime.now()}")
     # just a suggestion, the latest release
     rr = repo.get_releases()
-    print(f"* **release**: [{rr[0].tag_name}]({rr[0].html_url})")
+    print(f"* **release**: []({rr[0].html_url})")
     print(f"* **documentation**: {repo.homepage}")
     if milestone is not None:
         print(f"* **milestone**: [{milestone.title}]({milestone.url})")
         print("")
     print("section | quantity")
-    print("-" * 5, " | ", "-" * 5)
+    print(hbar, " | ", hbar)
     print(f"[New Tags](#tags) | {len(tags)}")
     print(f"[Pull Requests](#pull-requests) | {len(pulls)}")
     print(f"[Issues](#issues) | {len(issues)}")
@@ -223,7 +224,7 @@ def report(title, repo, milestone, tags, pulls, issues, commits):
         print("-- none --")
     else:
         print("tag | date | commit")
-        print("-" * 5, " | ", "-" * 5, " | ", "-" * 5)
+        print(hbar, " | ", hbar, " | ", hbar)
         for k, tag in sorted(tags.items(), reverse=True):
             commit = repo.get_commit(tag.commit.sha)
             when = str2time(commit.last_modified).strftime("%Y-%m-%d")
@@ -243,7 +244,7 @@ def report(title, repo, milestone, tags, pulls, issues, commits):
         print("-- none --")
     else:
         print("pull request | date | state | title")
-        print("-" * 5, " | ", "-" * 5, " | ", "-" * 5, " | ", "-" * 5)
+        print(hbar, " | ", hbar, " | ", hbar, " | ", hbar)
         for k, pull in sorted(pulls.items(), reverse=True):
             state = {True: "merged", False: "closed"}[pull.merged]
             when = pull.closed_at.isoformat(sep=" ").split()[0]
@@ -265,14 +266,17 @@ def report(title, repo, milestone, tags, pulls, issues, commits):
             logger.debug("[closed: %s] %d %s", v.closed_at, k, v.title)
             return v.closed_at
 
-        print("issue | date | title")
-        print("-" * 5, " | ", "-" * 5, " | ", "-" * 5)
+        print("issue | date | state | label(s) | title")
+        print(hbar, " | ", hbar, " | ", hbar, " | ", hbar, " | ", hbar)
         for k, issue in sorted(issues.items(), key=isorter, reverse=True):
             if k not in pulls:
                 when = issue.closed_at.strftime("%Y-%m-%d")
+                labels = ", ".join([l.name for l in issue.labels])
                 print(
                     f"[#{issue.number}]({issue.html_url})"
                     f" | {when}"
+                    f" | {issue.state}"
+                    f" | {labels}"
                     f" | {issue.title}"
                 )
     print("")
@@ -289,7 +293,7 @@ def report(title, repo, milestone, tags, pulls, issues, commits):
             return v.raw_data["commit"]["committer"]["date"]
 
         print("commit | date | message")
-        print("-" * 5, " | ", "-" * 5, " | ", "-" * 5)
+        print(hbar, " | ", hbar, " | ", hbar)
         for k, commit in sorted(
             commits.items(), key=csorter, reverse=True
         ):
@@ -328,7 +332,7 @@ if __name__ == "__main__":
 # -----------------------------------------------------------------------------
 # :author:    Pete R. Jemian
 # :email:     prjemian@gmail.com
-# :copyright: (c) 2014-2020, Pete R. Jemian
+# :copyright: (c) 2014-2021, Pete R. Jemian
 #
 # Distributed under the terms of the Creative Commons Attribution 4.0 International Public License.
 #
