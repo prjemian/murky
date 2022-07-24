@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 """
-Create release notes for a new release of a GitHub repository.
+Create detailed release notes for a new release of a GitHub repository.
 
-Run this from the package's root directory.
+Run from the root directory of a package.
 """
 
 # Requires:
