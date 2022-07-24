@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main   # push commit to the main branch
+    tags:
+      - '*'  # push tag to the main branch
+  pull_request:
+    branches:
+      - main   # pull request to the main branch
+  workflow_dispatch:   # allow manual triggering
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build-linux:
+    name: CI py${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10', '3.11']
+      max-parallel: 5
+    env:
+      python_version: ${{ matrix.python-version }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install Requirements
+        run: |
+          python3 -m pip install --upgrade pip setuptools
+          python3 -m pip install -r requirements.txt
+          python3 -m pip install pytest coverage coveralls
+          python3 -m pip install black flake8
+          python3 -m pip list
+
+      - name: Check Code Style
+        run: |
+          flake8
+          black boiga/create_release_notes.py
+          black setup.py
+
+      - name: Run Tests
+        run: |
+          coverage run --concurrency=thread --parallel-mode -m pytest -vvv .

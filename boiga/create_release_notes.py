@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 """
-Create release notes for a new release of a GitHub repository.
+Create detailed release notes for a new release of a GitHub repository.
 
-Run this from the package's root directory.
+Run from the root directory of a package.
 """
 
 # Requires:
@@ -85,9 +85,7 @@ def getRepositoryInfo():
                 return parse_git_url(url)
 
 
-def get_release_info(
-    token, base_tag_name, head_branch_name, milestone_name
-):
+def get_release_info(token, base_tag_name, head_branch_name, milestone_name):
     """Mine the Github API for information about this release."""
     organization_name, repository_name = getRepositoryInfo()
     gh = github.Github(token)  # GitHub Personal Access Token
@@ -99,9 +97,7 @@ def get_release_info(
     logger.debug(f"repo: {repo}")
 
     milestones = [
-        m
-        for m in repo.get_milestones(state="all")
-        if m.title == milestone_name
+        m for m in repo.get_milestones(state="all") if m.title == milestone_name
     ]
     if len(milestones) == 0:
         msg = f"Could not find milestone: {milestone_name}"
@@ -131,19 +127,14 @@ def get_release_info(
     logger.debug(f"# tags: {len(tags)}")
 
     pulls = {
-        p.number: p
-        for p in repo.get_pulls(state="closed")
-        if p.closed_at > earliest
+        p.number: p for p in repo.get_pulls(state="closed") if p.closed_at > earliest
     }
     logger.debug(f"# pulls: {len(pulls)}")
 
     issues = {
         i.number: i
         for i in repo.get_issues(milestone=milestone, state="closed")
-        if (
-            (milestone is not None or i.closed_at > earliest)
-            and i.number not in pulls
-        )
+        if ((milestone is not None or i.closed_at > earliest) and i.number not in pulls)
     }
     logger.debug(f"# issues: {len(issues)}")
 
@@ -164,10 +155,7 @@ def parse_command_line():
     parser.add_argument(
         "token",
         action="store",
-        help=(
-            "personal access token "
-            "(see: https://github.com/settings/tokens)"
-        ),
+        help=("personal access token " "(see: https://github.com/settings/tokens)"),
     )
 
     help_text = "name of tag, branch, SHA to end the range"
@@ -194,9 +182,7 @@ def str2time(time_string):
         msg = f"need valid date/time string, not: {time_string}"
         logger.error(msg)
         raise ValueError(msg)
-    return datetime.datetime.strptime(
-        time_string, "%a, %d %b %Y %H:%M:%S %Z"
-    )
+    return datetime.datetime.strptime(time_string, "%a, %d %b %Y %H:%M:%S %Z")
 
 
 def report(title, repo, milestone, tags, pulls, issues, commits):
@@ -229,9 +215,7 @@ def report(title, repo, milestone, tags, pulls, issues, commits):
             commit = repo.get_commit(tag.commit.sha)
             when = str2time(commit.last_modified).strftime("%Y-%m-%d")
             base_url = tag.commit.html_url
-            tag_url = "/".join(
-                base_url.split("/")[:-2] + ["releases", "tag", k]
-            )
+            tag_url = "/".join(base_url.split("/")[:-2] + ["releases", "tag", k])
             print(
                 f"[{k}]({tag_url})"
                 f" | {when}"
@@ -293,13 +277,9 @@ def report(title, repo, milestone, tags, pulls, issues, commits):
 
         print("commit | date | message")
         print(hbar, " | ", hbar, " | ", hbar)
-        for k, commit in sorted(
-            commits.items(), key=csorter, reverse=True
-        ):
+        for k, commit in sorted(commits.items(), key=csorter, reverse=True):
             message = commit.commit.message.splitlines()[0]
-            when = commit.raw_data["commit"]["committer"]["date"].split(
-                "T"
-            )[0]
+            when = commit.raw_data["commit"]["committer"]["date"].split("T")[0]
             print(f"[{k[:7]}]({commit.html_url}) | {when} | {message}")
 
 
@@ -317,9 +297,7 @@ def main(base=None, head=None, milestone=None, token=None, debug=False):
         token = cmd.token
         logger.setLevel(logging.WARNING)
 
-    info = get_release_info(
-        token, base_tag_name, head_branch_name, milestone_name
-    )
+    info = get_release_info(token, base_tag_name, head_branch_name, milestone_name)
     # milestone, repo, tags, pulls, issues, commits = info
     report(milestone_name, *info)
 
