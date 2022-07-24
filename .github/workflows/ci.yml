@@ -38,10 +38,11 @@ jobs:
           python3 -m pip install -r requirements.txt
           python3 -m pip list
 
-      - name: Check Code Style
-        run: |
-          make style
+      # - name: Check Code Style
+      #   run: |
+      #     flake8
+      #     black
 
       - name: Run Tests
         run: |
-          make test
+          pytest -vvv
