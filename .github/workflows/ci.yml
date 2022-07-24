@@ -36,6 +36,7 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip setuptools
           python3 -m pip install -r requirements.txt
+          python3 -m pip install pytest coverage coveralls
           python3 -m pip list
 
       # - name: Check Code Style
@@ -45,4 +46,4 @@ jobs:
 
       - name: Run Tests
         run: |
-          pytest -vvv
+          coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
