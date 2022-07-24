@@ -37,12 +37,14 @@ jobs:
           python3 -m pip install --upgrade pip setuptools
           python3 -m pip install -r requirements.txt
           python3 -m pip install pytest coverage coveralls
+          python3 -m pip install black flake8
           python3 -m pip list
 
-      # - name: Check Code Style
-      #   run: |
-      #     flake8
-      #     black
+      - name: Check Code Style
+        run: |
+          flake8
+          black boiga/create_release_notes.py
+          black setup.py
 
       - name: Run Tests
         run: |

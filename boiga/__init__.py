@@ -1,17 +1,15 @@
-__project__ = u"boiga"
-__description__ = (
-    u"The boiga package provides tools for working with conda packages."
-)
-__copyright__ = u"2018-2022, Pete R. Jemian"
+__project__ = "boiga"
+__description__ = "The boiga package provides tools for working with conda packages."
+__copyright__ = "2018-2022, Pete R. Jemian"
 __authors__ = [
-    u"Pete Jemian",
+    "Pete Jemian",
 ]
 __author__ = ", ".join(__authors__)
 # __institution__ = u""
-__author_email__ = u"prjemian@gmail.com"
-__url__ = u"https://github.com/prjemian/boiga/"
-__license__ = u"(c) " + __copyright__
-__license__ += u" (see LICENSE file for details)"
+__author_email__ = "prjemian@gmail.com"
+__url__ = "https://github.com/prjemian/boiga/"
+__license__ = "(c) " + __copyright__
+__license__ += " (see LICENSE file for details)"
 __platforms__ = "any"
 __zip_safe__ = False
 __exclude_project_dirs__ = "docs resources".split()
