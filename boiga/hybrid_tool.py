@@ -5,6 +5,7 @@ Tool used in support of hybrid_installer.sh
 """
 
 import argparse
+
 try:
     import ruamel_yaml as yaml
 except ModuleNotFoundError:
@@ -36,13 +37,11 @@ def print_environment_name(specs):
 
 
 def get_user_parameters():
-    parser = argparse.ArgumentParser(prog="hybrid_tool",)
-    parser.add_argument(
-        "function", action="store", help="one of: name, pip, conda"
+    parser = argparse.ArgumentParser(
+        prog="hybrid_tool",
     )
-    parser.add_argument(
-        "env_file", action="store", help="environment YAML file"
-    )
+    parser.add_argument("function", action="store", help="one of: name, pip, conda")
+    parser.add_argument("env_file", action="store", help="environment YAML file")
     return parser.parse_args()
 
 
@@ -57,9 +56,6 @@ def main():
 
 
 if __name__ == "__main__":
-    # import sys
-    # sys.argv.append("pip")
-    # sys.argv.append("./install/test.yml")
     main()
 
 # -----------------------------------------------------------------------------
