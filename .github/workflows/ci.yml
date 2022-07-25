@@ -49,3 +49,9 @@ jobs:
       - name: Run Tests
         run: |
           coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
+          # check that these commands work
+          boiga_tool --help
+          boiga_tool name boiga/env_example1.yml
+          boiga_tool conda boiga/env_example1.yml
+          boiga_tool pip boiga/env_example1.yml
+          boiga_create.sh help
