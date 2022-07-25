@@ -36,21 +36,21 @@ jobs:
       - name: Create Python ${{ matrix.python-version }} environment
         uses: mamba-org/provision-with-micromamba@v12
         with:
-          cache-downloads: true
-          cache-env: true
-          channels: defaults, conda-forge
-          environment-file: false
+          # cache-downloads: true
+          # cache-env: true
+          # channels: defaults, conda-forge
+          environment-file: .github/env-ci.yml
           environment-name: anaconda-test-env-py-${{ matrix.python-version }}
-          extra-specs: |
-            python=${{ matrix.python-version }}
-            black>=22.1
-            coverage
-            coveralls
-            flake8
-            pip
-            pygithub
-            pytest
-            setuptools
+          # extra-specs: |
+          #   python=${{ matrix.python-version }}
+          #   black>=22.1
+          #   coverage
+          #   coveralls
+          #   flake8
+          #   pip
+          #   pygithub
+          #   pytest
+          #   setuptools
 
       # - name: Install Requirements
       #   run: |
