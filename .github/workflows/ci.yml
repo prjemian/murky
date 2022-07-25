@@ -38,13 +38,12 @@ jobs:
         with:
           cache-downloads: true
           cache-env: true
-          channel-priority: flexible
           channels: defaults, conda-forge
           environment-file: false
           environment-name: anaconda-test-env-py-${{ matrix.python-version }}
           extra-specs: |
             python=${{ matrix.python-version }}
-            black
+            black>=21.10b0
             coverage
             coveralls
             flake8
@@ -52,7 +51,6 @@ jobs:
             pygithub
             pytest
             setuptools
-            typed-ast>=1.5.0 
 
       # - name: Install Requirements
       #   run: |
