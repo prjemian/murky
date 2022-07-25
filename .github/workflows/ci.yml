@@ -32,13 +32,34 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install Requirements
-        run: |
-          python3 -m pip install --upgrade pip setuptools
-          python3 -m pip install -r requirements.txt
-          python3 -m pip install pytest coverage coveralls
-          python3 -m pip install black flake8
-          python3 -m pip list
+      - name: Create Python ${{ matrix.python-version }} environment
+        uses: mamba-org/provision-with-micromamba@v12
+        with:
+          cache-downloads: true
+          cache-env: true
+          channels:
+            defaults
+            conda-forge
+          environment-file: false
+          environment-name: anaconda-test-env-py-${{ matrix.python-version }}
+          extra-specs:
+            python=${{ matrix.python-version }}
+            black
+            coverage
+            coveralls
+            flake8
+            pip
+            pygithub
+            pytest
+            setuptools
+
+      # - name: Install Requirements
+      #   run: |
+      #     python3 -m pip install --upgrade pip setuptools
+      #     python3 -m pip install -r requirements.txt
+      #     python3 -m pip install pytest coverage coveralls
+      #     python3 -m pip install black flake8
+      #     python3 -m pip list
 
       - name: Check Code Style
         run: |
