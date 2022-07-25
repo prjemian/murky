@@ -20,9 +20,9 @@ function usage {
 # ----- 1. accepts an environment file name and optional environment name
 
 APP_DIR="$(realpath $(dirname ${0}))"
-PYTOOL=$(which hybrid_installer_tool)
+PYTOOL=$(which boiga_tool)
 if [ "${PYTOOL}" == "" ]; then
-    PYTOOL="python3 ${APP_DIR}/hybrid_tool.py"
+    PYTOOL="python3 ${APP_DIR}/boiga_tool.py"
 fi
 
 if [ "$(which micromamba)" == "" ]; then

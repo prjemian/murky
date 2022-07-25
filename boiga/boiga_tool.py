@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Tool used in support of hybrid_installer.sh
+Tool used in support of boiga_create.sh
 """
 
 import argparse

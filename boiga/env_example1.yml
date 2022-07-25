@@ -1,6 +1,6 @@
 name: boiga_test_environment
 
-# ./hybrid_installer.sh test.yml
+# ./boiga_create.sh test.yml
 
 channels:
   - conda-forge
