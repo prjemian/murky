@@ -51,6 +51,7 @@ jobs:
           coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
 
       - name: Command Tests
+        shell: bash -l {0}
         run: |
           python3 -m pip install -e .
           # check that these commands work
