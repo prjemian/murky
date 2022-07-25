@@ -29,7 +29,16 @@ def print_pip_requirements(specs):
 
 
 def print_conda_requirements(specs):
-    pass  # TODO: but not needed
+    dependencies = []
+    if "dependencies" in specs:  # if NOT, then why bother with this?
+        for req in specs["dependencies"]:
+            if isinstance(req, dict):
+                if req.get("pip") is None:
+                    dependencies.append(req)
+            else:
+                dependencies.append(req)
+        specs["dependencies"] = dependencies
+    print(yaml.dump(specs))
 
 
 def print_environment_name(specs):
@@ -48,7 +57,7 @@ def get_user_parameters():
 def main():
     args = get_user_parameters()
     func = dict(
-        conda=print_pip_requirements,
+        conda=print_conda_requirements,
         name=print_environment_name,
         pip=print_pip_requirements,
     )[args.function]

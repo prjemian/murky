@@ -2,6 +2,8 @@
 
 # purpose: hybrid micromamba/conda environment creator
 
+echo "$0 $@"
+
 function usage {
     echo "usage: ${0} [-c] [-n env_name] [-y] env_file"
     echo ""
@@ -74,9 +76,20 @@ echo "create ${options} -n ${environment} ${yml_file}"
 # ----- 2. build test micromamba environment
 
 TIMEDATE=$(date "+%H%M%S")
-temp_env="hybrid_env_${TIMEDATE}"
+temp_env="_temporary_boiga_env_${TIMEDATE}"
 # echo temp_env=${temp_env}
 micromamba create ${options} -n "${temp_env}" -f "${yml_file}"
+
+_match=$(micromamba env list | grep "/envs/${temp_env}")
+if [ "${_match}" == "" ]; then
+    # What if user said NO to continue with install?  Or install failed?
+    echo "Did not create temporary environment '${temp_env}'.  Stopping."
+    exit
+else
+    micromamba env list
+    echo "Activating temporary micromamba environment: ${temp_env}"
+fi
+
 eval "$(micromamba shell hook --shell=bash)"
 micromamba activate "${temp_env}"
 # micromamba env list
@@ -90,7 +103,10 @@ ${PYTOOL} pip "${yml_file}" | tee "${pip_req_file}"
 
 conda_explicit_file="/tmp/${TIMEDATE}_conda_explicit.txt"
 conda list --explicit | tee "${conda_explicit_file}"
-# TODO: edit the environment name into the explicit file using sed
+# Edit the environment name into the explicit file.
+# $ conda create --name <env> --file <this file>
+sed -i s+'<env>'+`echo "${environment}"`+g   "${conda_explicit_file}"
+sed -i s+'<this file>'+`echo "${conda_explicit_file}"`+g   "${conda_explicit_file}"
 
 # ----- 5. remove the test micromamba environment
 
