@@ -37,9 +37,7 @@ jobs:
         with:
           cache-downloads: true
           cache-env: true
-          channels:
-            defaults
-            conda-forge
+          channels: defaults, conda-forge
           environment-file: false
           environment-name: anaconda-test-env-py-${{ matrix.python-version }}
           extra-specs:
