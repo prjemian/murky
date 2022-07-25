@@ -13,7 +13,7 @@ on:
 
 defaults:
   run:
-    shell: bash
+    shell: bash -l {0}
 
 jobs:
   build-linux:
@@ -51,9 +51,8 @@ jobs:
           coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
 
       - name: Command Tests
-        shell: bash -l {0}
         run: |
-          python3 -m pip install -e .
+          python3 ./setup.py install --user .
           # check that these commands work
           boiga_tool --help
           boiga_tool name boiga/env_example1.yml
