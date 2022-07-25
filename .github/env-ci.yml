@@ -1,8 +1,8 @@
 name: boiga-ci
 
 channels:
-  - defaults
   - conda-forge
+  - defaults
 
 dependencies:
   - black>=22.1
