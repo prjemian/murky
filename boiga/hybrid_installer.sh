@@ -1,18 +1,27 @@
 #!/bin/bash
 
-# purpose: hybrid conda environment installer
+# purpose: hybrid micromamba/conda environment creator
 
 function usage {
-    echo "usage: ${0} [-y] [-c] [-n env_name] env_file.yml"
-    # TODO: explain
+    echo "usage: ${0} [-c] [-n env_name] [-y] env_file"
+    echo ""
+    echo "positional arguments:"
+    echo "  env_file    environment YAML file"
+    echo ""
+    echo "optional arguments:"
+    echo "  -c                Cleanup (delete) all temporary files on completion."
+    echo "  --n ENVIRONMENT   Name of environment."
+    echo "  -y                respond 'yes' to all prompts."
     exit
 }
 
 # ----- 1. accepts an environment file name and optional environment name
 
 APP_DIR="$(realpath $(dirname ${0}))"
-PYTOOL="${APP_DIR}/hybrid_tool.py"
-PYTHON=$(which python)
+PYTOOL=$(which hybrid_installer_tool)
+if [ "${PYTOOL}" == "" ]; then
+    PYTOOL="python3 ${APP_DIR}/hybrid_tool.py"
+fi
 
 if [ "$(which micromamba)" == "" ]; then
     echo "Cannot identify micromamba executable."
@@ -51,7 +60,7 @@ done
 
 if [ -e "${yml_file}" ]; then
     if [ "${environment}" == "" ]; then
-        environment=$(${PYTHON} ${PYTOOL} name "${yml_file}")
+        environment=$(${PYTOOL} name "${yml_file}")
     fi
 else
     usage
@@ -75,12 +84,13 @@ micromamba activate "${temp_env}"
 # ----- 3. create a pip requirements file from the input environment file
 
 pip_req_file="/tmp/${TIMEDATE}_pip_req.txt"
-${PYTHON} ${PYTOOL} pip "${yml_file}" | tee "${pip_req_file}"
+${PYTOOL} pip "${yml_file}" | tee "${pip_req_file}"
 
 # ----- 4. generate the explicit package list for conda
 
 conda_explicit_file="/tmp/${TIMEDATE}_conda_explicit.txt"
 conda list --explicit | tee "${conda_explicit_file}"
+# TODO: edit the environment name into the explicit file using sed
 
 # ----- 5. remove the test micromamba environment
 

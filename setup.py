@@ -13,6 +13,7 @@ import boiga as package
 __entry_points__ = {
     "console_scripts": [
         "create_release_notes = boiga.create_release_notes:main",
+        "hybrid_installer_tool = boiga.hybrid_tool:main",
     ],
     # 'gui_scripts': [],
 }
@@ -34,6 +35,7 @@ setup(
     long_description=package.__long_description__,
     packages=find_packages(exclude=package.__exclude_project_dirs__),
     python_requires=package.__python_version_required__,
+    scripts=["boiga/hybrid_installer.sh"],
     url=package.__url__,
     zip_safe=package.__zip_safe__,
     cmdclass=versioneer.get_cmdclass(),
