@@ -43,7 +43,7 @@ jobs:
           environment-name: anaconda-test-env-py-${{ matrix.python-version }}
           extra-specs: |
             python=${{ matrix.python-version }}
-            black>=21.10b0
+            black>=22.1
             coverage
             coveralls
             flake8
