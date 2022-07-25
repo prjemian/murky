@@ -52,7 +52,8 @@ jobs:
 
       - name: Command Tests
         run: |
-          python3 ./setup.py install --user
+          python3 ./setup.py build sdist
+          python3 -m pip install .
           # check that these commands work
           boiga_tool --help
           boiga_tool name boiga/env_example1.yml
