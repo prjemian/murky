@@ -40,7 +40,7 @@ jobs:
           channels: defaults, conda-forge
           environment-file: false
           environment-name: anaconda-test-env-py-${{ matrix.python-version }}
-          extra-specs:
+          extra-specs: |
             python=${{ matrix.python-version }}
             black
             coverage
