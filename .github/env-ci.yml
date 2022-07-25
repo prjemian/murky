@@ -1,0 +1,15 @@
+name: boiga-ci
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - black>=22.1
+  - coverage
+  - coveralls
+  - flake8
+  - pip
+  - pygithub
+  - pytest
+  - setuptools

@@ -1,6 +1,6 @@
 __project__ = "boiga"
 __description__ = "The boiga package provides tools for working with conda packages."
-__copyright__ = "2018-2022, Pete R. Jemian"
+__copyright__ = "2014-2022, Pete R. Jemian"
 __authors__ = [
     "Pete Jemian",
 ]
@@ -49,7 +49,7 @@ del get_versions
 # -----------------------------------------------------------------------------
 # :author:    Pete R. Jemian
 # :email:     prjemian@gmail.com
-# :copyright: (c) 2018-2022, Pete R. Jemian
+# :copyright: (c) 2014-2022, Pete R. Jemian
 #
 # Distributed under the terms of the Creative Commons Attribution 4.0 International Public License.
 #

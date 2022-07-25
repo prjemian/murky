@@ -13,7 +13,7 @@ on:
 
 defaults:
   run:
-    shell: bash
+    shell: bash -l {0}
 
 jobs:
   build-linux:
@@ -21,7 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.8', '3.9', '3.10', '3.11']
+        python-version: ['3.8', '3.9', '3.10']
+        # python-version: ['3.8', '3.9', '3.10', '3.11']  # 2022-Q4
       max-parallel: 5
     env:
       python_version: ${{ matrix.python-version }}
@@ -32,20 +33,32 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install Requirements
-        run: |
-          python3 -m pip install --upgrade pip setuptools
-          python3 -m pip install -r requirements.txt
-          python3 -m pip install pytest coverage coveralls
-          python3 -m pip install black flake8
-          python3 -m pip list
+      - name: Create Python ${{ matrix.python-version }} environment
+        uses: mamba-org/provision-with-micromamba@v12
+        with:
+          environment-file: .github/env-ci.yml
+          environment-name: anaconda-test-env-py-${{ matrix.python-version }}
 
       - name: Check Code Style
         run: |
           flake8
+          black boiga/boiga_tool.py
           black boiga/create_release_notes.py
           black setup.py
 
-      - name: Run Tests
+      - name: Python Tests
         run: |
           coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
+
+      - name: Install for functional testing
+        run: |
+          python3 ./setup.py build sdist
+          python3 -m pip install .
+
+      - name: Command Tests
+        run: |
+          boiga_tool --help
+          boiga_tool name boiga/env_example1.yml
+          boiga_tool conda boiga/env_example1.yml
+          boiga_tool pip boiga/env_example1.yml
+          boiga_create.sh help
