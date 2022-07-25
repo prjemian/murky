@@ -46,9 +46,13 @@ jobs:
           black boiga/create_release_notes.py
           black setup.py
 
-      - name: Run Tests
+      - name: Python Tests
         run: |
           coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
+
+      - name: Command Tests
+        run: |
+          python3 -m pip install -e .
           # check that these commands work
           boiga_tool --help
           boiga_tool name boiga/env_example1.yml
