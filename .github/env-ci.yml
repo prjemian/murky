@@ -1,4 +1,4 @@
-name: water_moccasin-ci
+name: murky-ci
 
 channels:
   - conda-forge

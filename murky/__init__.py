@@ -1,5 +1,5 @@
-__project__ = "water_moccasin"
-__description__ = "The water_moccasin package provides tools for working with conda packages."
+__project__ = "murky"
+__description__ = "The murky package provides tools for working with conda packages."
 __copyright__ = "2014-2022, Pete R. Jemian"
 __authors__ = [
     "Pete Jemian",
@@ -7,7 +7,7 @@ __authors__ = [
 __author__ = ", ".join(__authors__)
 # __institution__ = u""
 __author_email__ = "prjemian@gmail.com"
-__url__ = "https://github.com/prjemian/water_moccasin/"
+__url__ = "https://github.com/prjemian/murky/"
 __license__ = "(c) " + __copyright__
 __license__ += " (see LICENSE file for details)"
 __platforms__ = "any"

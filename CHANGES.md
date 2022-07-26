@@ -5,6 +5,8 @@
 
 ## Development
 
-### 2022-07-23
+### 0.0.1
 
-- Package renamed as `water_moccasin` (formerly `condatools` and `boiga`).
+2022-07-26
+
+- Package renamed as `murky` (formerly `condatools`, `boiga`, and `water_moccasin`).

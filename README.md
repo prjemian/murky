@@ -1,3 +1,3 @@
-# water_-_moccasin
+# murky
 
-The [water_moccasin](https://animalia.bio/water-moccasin) package provides tools for working with conda packages.
+`murky` provides tools for working with conda packages.
