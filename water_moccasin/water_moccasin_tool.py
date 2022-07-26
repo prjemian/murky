@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Tool used in support of boiga_create.sh
+Tool used in support of water_moccasin_create.sh
 """
 
 import argparse

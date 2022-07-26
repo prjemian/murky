@@ -42,8 +42,8 @@ jobs:
       - name: Check Code Style
         run: |
           flake8
-          black boiga/boiga_tool.py
-          black boiga/create_release_notes.py
+          black water_moccasin/water_moccasin_tool.py
+          black water_moccasin/create_release_notes.py
           black setup.py
 
       - name: Python Tests
@@ -57,8 +57,8 @@ jobs:
 
       - name: Command Tests
         run: |
-          boiga_tool --help
-          boiga_tool name boiga/env_example1.yml
-          boiga_tool conda boiga/env_example1.yml
-          boiga_tool pip boiga/env_example1.yml
-          boiga_create.sh help
+          water_moccasin_tool --help
+          water_moccasin_tool name water_moccasin/env_example1.yml
+          water_moccasin_tool conda water_moccasin/env_example1.yml
+          water_moccasin_tool pip water_moccasin/env_example1.yml
+          water_moccasin_create.sh help

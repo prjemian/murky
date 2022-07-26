@@ -20,9 +20,9 @@ function usage {
 # ----- 1. accepts an environment file name and optional environment name
 
 APP_DIR="$(realpath $(dirname ${0}))"
-PYTOOL=$(which boiga_tool)
+PYTOOL=$(which water_moccasin_tool)
 if [ "${PYTOOL}" == "" ]; then
-    PYTOOL="python3 ${APP_DIR}/boiga_tool.py"
+    PYTOOL="python3 ${APP_DIR}/water_moccasin_tool.py"
 fi
 
 if [ "$(which micromamba)" == "" ]; then
@@ -76,7 +76,7 @@ echo "create ${options} -n ${environment} ${yml_file}"
 # ----- 2. build test micromamba environment
 
 TIMEDATE=$(date "+%H%M%S")
-temp_env="_temporary_boiga_env_${TIMEDATE}"
+temp_env="_temporary_water_moccasin_env_${TIMEDATE}"
 # echo temp_env=${temp_env}
 micromamba create ${options} -n "${temp_env}" -f "${yml_file}"
 
