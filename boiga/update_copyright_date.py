@@ -10,7 +10,10 @@ This is the bash command to find all matching lines::
 See copyright text at bottom of this file for example.
 """
 
-import os  # TODO: use pathlib
+# TODO: re-examine from top to bottom
+# TODO: consider using a regexp match instead (non-regexp seems easier)
+
+import pathlib
 import sys
 import mimetypes
 import datetime
@@ -22,6 +25,15 @@ ROOT_DIR_EXPECTED_RESOURCES = {
     'files': [".README.md", "setup.py"],
     'subdirs': [".git"],
 }
+ACCEPTABLE_MIME_TYPES = """
+    application/xml
+    application/x-msdos-program
+    application/xslt+xml
+""".strip().split()
+IGNORE_EXTENSIONS = """
+    .dia .vsdx .h5 .nx .hdf5 .hdf .nx5 .pyc
+""".strip().split()
+
 
 def update(filename):
     """update the copyright year in the file"""
@@ -33,7 +45,7 @@ def update(filename):
                 return pos
         return None
 
-    if not os.path.exists(filename):
+    if not pathlib.Path(filename).exists():
         return
     changes = []
     buf = open(filename).readlines()
@@ -72,7 +84,10 @@ def update(filename):
 
 def find_source_files(path):
     """walk the source_path directories accumulating files to be checked"""
+    path = pathlib.Path(path)
     file_list = []
+    # TODO: refactor with pathlib & iterdir
+    import os
     for root, dirs, files in os.walk(path):
         if root.find("/.git") < 0 or root.find("/kits") < 0:
             file_list = file_list + [os.path.join(root, _) for _ in files]
@@ -81,17 +96,12 @@ def find_source_files(path):
 
 def sift_file_list(file_list):
     """remove known non-text files and paths"""
+    import os  # TODO: refactor with pathlib
     new_list = []
-    acceptable_mime_types = """
-        application/xml
-        application/x-msdos-program
-        application/xslt+xml
-    """.strip().split()
-    ignore_extensions = """
-    .dia .vsdx .h5 .nx .hdf5 .hdf .nx5 .pyc
-    """.strip().split()
+    acceptable_mime_types = ACCEPTABLE_MIME_TYPES
+    ignore_extensions = IGNORE_EXTENSIONS
     for fn in file_list:
-        _fn = os.path.split(fn)[-1]
+        _fn = os.path.split(fn)[-1]  # TODO: refactor with pathlib
         mime = mimetypes.guess_type(fn)[0]
         if fn.find("/.git") >= 0:
             continue
@@ -101,7 +111,7 @@ def sift_file_list(file_list):
             continue
         if fn.find("/build") >= 0:
             continue
-        if os.path.splitext(fn)[-1] in ignore_extensions:
+        if os.path.splitext(fn)[-1] in ignore_extensions:  # TODO: refactor with pathlib
             continue
         if mime is None or mime.startswith("text/") or mime in acceptable_mime_types:
             new_list.append(fn)
@@ -111,19 +121,21 @@ def sift_file_list(file_list):
 def is_definitions_directory(basedir):
     """Test if ``basedir`` is a repository root."""
     # look for the expected files and subdirectories in the root directory
+    basedir = pathlib.Path(basedir)
     for item_list in ROOT_DIR_EXPECTED_RESOURCES.values():
         for item in item_list:
-            if not os.path.exists(os.path.join(basedir, item)):
+            if not (basedir / item).exists():
                 return False
     return True
 
 
 def qualify_inputs(root_dir):
     """Raise error if this program cannot continue, based on the inputs."""
-    if not os.path.exists(root_dir):
+    root_dir = pathlib.Path(root_dir)
+    if not root_dir.exists():
         raise RuntimeError("Cannot find " + root_dir)
 
-    if not os.path.isdir(root_dir):
+    if not root_dir.is_dir():
         raise RuntimeError("Not a directory: " + root_dir)
 
     if not is_definitions_directory(root_dir):
@@ -154,11 +166,10 @@ def main():
     * target directory is specified (or defaults to present working directory)
     """
     cli = command_args()
-    root_dir = os.path.abspath(cli.root_dir)
+    root_dir = pathlib.Path(cli.root_dir).absolute()
     qualify_inputs(root_dir)
 
-    file_list = sift_file_list(find_source_files(root_dir))
-    for fn in file_list:
+    for fn in sift_file_list(find_source_files(root_dir)):
         update(fn)
 
 

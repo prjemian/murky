@@ -1,28 +1,19 @@
-# -----------------------------------------------------------------------------
-# :author:    Pete R. Jemian
-# :email:     jemian@anl.gov
-# :copyright: (c) 2014-2022, UChicago Argonne, LLC
-#
-# Distributed under the terms of the Creative Commons Attribution 4.0 International Public License.
-#
-# The full license is in the file LICENSE.txt, distributed with this software.
-# -----------------------------------------------------------------------------
 
 
 def learn_requirements():
     """
-    list all installation requirements
+    List all installation requirements.
 
     ALL packages & version restrictions stated in requirements.txt
     """
     req_file = "requirements.txt"
     reqs = []
 
-    import os
+    import pathlib
 
-    path = os.path.dirname(__file__)
-    req_file = os.path.join(path, "..", req_file)
-    if not os.path.exists(req_file):
+    path = pathlib.Path(__file__).parent
+    req_file = path.parent / req_file
+    if not req_file.exists():
         # not needed with installed package
         return reqs
 
@@ -38,3 +29,13 @@ def learn_requirements():
             ):
                 reqs.append(req)
     return reqs
+
+# -----------------------------------------------------------------------------
+# :author:    Pete R. Jemian
+# :email:     prjemian@gmail.com
+# :copyright: (c) 2014-2022, Pete R. Jemian
+#
+# Distributed under the terms of the Creative Commons Attribution 4.0 International Public License.
+#
+# The full license is in the file LICENSE, distributed with this software.
+# -----------------------------------------------------------------------------
