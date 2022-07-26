@@ -1,5 +1,3 @@
-
-
 def learn_requirements():
     """
     List all installation requirements.
@@ -20,6 +18,7 @@ def learn_requirements():
     excludes = "versioneer coveralls coverage".split()
     with open(req_file, "r") as fp:
         buf = fp.read().strip().splitlines()
+        # fmt: off
         for req in buf:
             req = req.strip()
             if (
@@ -28,7 +27,9 @@ def learn_requirements():
                 and req not in excludes
             ):
                 reqs.append(req)
+        # fmt: on
     return reqs
+
 
 # -----------------------------------------------------------------------------
 # :author:    Pete R. Jemian

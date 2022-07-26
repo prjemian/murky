@@ -22,8 +22,8 @@ YEAR = datetime.datetime.now().year
 LEFT_SIDE_TEXT_MATCH = "Copyright (C) "  # FIXME: generalize
 RIGHT_SIDE_TEXT_MATCH = " Pete R. Jemian"  # FIXME: generalize
 ROOT_DIR_EXPECTED_RESOURCES = {
-    'files': [".README.md", "setup.py"],
-    'subdirs': [".git"],
+    "files": [".README.md", "setup.py"],
+    "subdirs": [".git"],
 }
 ACCEPTABLE_MIME_TYPES = """
     application/xml
@@ -88,6 +88,7 @@ def find_source_files(path):
     file_list = []
     # TODO: refactor with pathlib & iterdir
     import os
+
     for root, dirs, files in os.walk(path):
         if root.find("/.git") < 0 or root.find("/kits") < 0:
             file_list = file_list + [os.path.join(root, _) for _ in files]
@@ -97,11 +98,12 @@ def find_source_files(path):
 def sift_file_list(file_list):
     """remove known non-text files and paths"""
     import os  # TODO: refactor with pathlib
+
     new_list = []
     acceptable_mime_types = ACCEPTABLE_MIME_TYPES
     ignore_extensions = IGNORE_EXTENSIONS
     for fn in file_list:
-        _fn = os.path.split(fn)[-1]  # TODO: refactor with pathlib
+        # _fn = os.path.split(fn)[-1]  # TODO: refactor with pathlib
         mime = mimetypes.guess_type(fn)[0]
         if fn.find("/.git") >= 0:
             continue
@@ -149,9 +151,11 @@ def command_args():
 
     doc = __doc__.strip().splitlines()[0]
     parser = argparse.ArgumentParser(prog=sys.argv[0], description=doc)
+    # fmt: off
     parser.add_argument(
         "root_dir", action="store", help="repository root directory"
     )
+    # fmt: on
     # TODO: option for LEFT_SIDE_TEXT_MATCH
     # TODO: option for RIGHT_SIDE_TEXT_MATCH
     # TODO: option for ROOT_DIR_EXPECTED_RESOURCES
@@ -161,7 +165,7 @@ def command_args():
 def main():
     """
     Standard command-line processing.
-    
+
     * source directory (repository root dir) named as command line argument
     * target directory is specified (or defaults to present working directory)
     """
