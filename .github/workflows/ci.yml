@@ -42,8 +42,8 @@ jobs:
       - name: Check Code Style
         run: |
           flake8
-          black water_moccasin/water_moccasin_tool.py
-          black water_moccasin/create_release_notes.py
+          black murky/murky_tool.py
+          black murky/create_release_notes.py
           black setup.py
 
       - name: Python Tests
@@ -57,8 +57,8 @@ jobs:
 
       - name: Command Tests
         run: |
-          water_moccasin_tool --help
-          water_moccasin_tool name water_moccasin/env_example1.yml
-          water_moccasin_tool conda water_moccasin/env_example1.yml
-          water_moccasin_tool pip water_moccasin/env_example1.yml
-          water_moccasin_create.sh help
+          murky_tool --help
+          murky_tool name murky/env_example1.yml
+          murky_tool conda murky/env_example1.yml
+          murky_tool pip murky/env_example1.yml
+          murky_create.sh help

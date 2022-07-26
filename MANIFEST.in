@@ -1,5 +1,5 @@
 include CHANGES.md
 include README.md
 include versioneer.py
-include water_moccasin/_requirements.py
-include water_moccasin/_version.py
+include murky/_requirements.py
+include murky/_version.py
