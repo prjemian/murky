@@ -7,4 +7,4 @@
 
 ### 2022-07-23
 
-- Package renamed as `boiga` (formerly `condatools`).
+- Package renamed as `water_moccasin` (formerly `condatools` and `boiga`).

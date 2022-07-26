@@ -7,24 +7,24 @@ import sys
 import versioneer
 
 # pull in some definitions from the package's __init__.py file
-sys.path.insert(0, (pathlib.Path(__file__).parent / "boiga"))
-import boiga as package
+sys.path.insert(0, (pathlib.Path(__file__).parent / "water_moccasin"))
+import water_moccasin as package
 
 __entry_points__ = {
     "console_scripts": [
-        "create_release_notes = boiga.create_release_notes:main",
-        "boiga_tool = boiga.boiga_tool:main",
+        "create_release_notes = water_moccasin.create_release_notes:main",
+        "water_moccasin_tool = water_moccasin.water_moccasin_tool:main",
     ],
     # 'gui_scripts': [],
 }
 __scripts__ = [
-    "boiga/boiga_create.sh",
+    "water_moccasin/water_moccasin_create.sh",
 ]
 
 # verbose = 1
 
 setup(
-    name=package.__package_name__,  # boiga
+    name=package.__package_name__,  # water_moccasin
     author_email=package.__author_email__,
     author=package.__author__,
     classifiers=package.__classifiers__,

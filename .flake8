@@ -6,7 +6,7 @@ exclude =
     dist,
     versioneer.py,
     docs/source,
-    boiga/_version.py,
+    water_moccasin/_version.py,
     ideas
 
 max-line-length = 115

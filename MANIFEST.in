@@ -1,5 +1,5 @@
 include CHANGES.md
 include README.md
 include versioneer.py
-include boiga/_requirements.py
-include boiga/_version.py
+include water_moccasin/_requirements.py
+include water_moccasin/_version.py

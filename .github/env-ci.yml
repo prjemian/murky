@@ -1,4 +1,4 @@
-name: boiga-ci
+name: water_moccasin-ci
 
 channels:
   - conda-forge

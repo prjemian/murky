@@ -1,6 +1,6 @@
-name: boiga_test_environment
+name: water_moccasin_test_environment
 
-# ./boiga_create.sh test.yml
+# ./water_moccasin_create.sh test.yml
 
 channels:
   - conda-forge

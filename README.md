@@ -1,3 +1,3 @@
-# boiga
+# water_-_moccasin
 
-The [boiga](https://en.wikipedia.org/wiki/Boiga) package provides tools for working with conda packages.
+The [water_moccasin](https://animalia.bio/water-moccasin) package provides tools for working with conda packages.
