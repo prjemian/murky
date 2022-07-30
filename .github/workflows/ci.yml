@@ -36,6 +36,8 @@ jobs:
       - name: Create Python ${{ matrix.python-version }} environment
         uses: mamba-org/provision-with-micromamba@v12
         with:
+          # cache-downloads: true
+          cache-env: true
           environment-file: .github/env-ci.yml
           environment-name: anaconda-test-env-py-${{ matrix.python-version }}
 

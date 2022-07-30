@@ -21,7 +21,16 @@ jobs:
 
       - name: Step 2
         run: |
-          touch something
+          mkdir treasures
+          echo "something" > treasures/precious.txt
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: treasures-without-markdown
+          path: |
+            treasures
+            !treasures/**/*.md
 
   part2:
     name: waiting
@@ -45,6 +54,9 @@ jobs:
     needs: part2
 
     steps:
+
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
 
       - name: Step 1
         run: |
