@@ -32,6 +32,10 @@ jobs:
             treasures
             !treasures/**/*.md
 
+      - name: ls
+        run: |
+          ls -lAFghR
+
   part2:
     name: waiting
     runs-on: ubuntu-latest
@@ -60,4 +64,4 @@ jobs:
 
       - name: Step 1
         run: |
-          ls -lAFgh
+          ls -lAFghR
