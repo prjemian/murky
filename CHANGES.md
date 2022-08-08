@@ -5,6 +5,17 @@
 
 ## Development
 
+### 0.0.3
+
+2022-08-08
+
+### 0.0.2
+
+2022-08-08
+
+- CI tests with Python versions: 3.7 - 3.10
+- add pyyaml packaging requirement
+
 ### 0.0.1
 
 2022-07-26
