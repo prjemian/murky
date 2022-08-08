@@ -13,7 +13,7 @@ __license__ += " (see LICENSE file for details)"
 __platforms__ = "any"
 __zip_safe__ = False
 __exclude_project_dirs__ = "docs resources".split()
-__python_version_required__ = ">=3.8, <3.12"
+__python_version_required__ = ">=3.7, <3.11"
 
 __package_name__ = __project__
 __long_description__ = __description__

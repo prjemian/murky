@@ -5,11 +5,7 @@ Tool used in support of murky_create.sh
 """
 
 import argparse
-
-try:
-    import ruamel_yaml as yaml
-except ModuleNotFoundError:
-    import yaml
+import yaml
 
 
 def read_yml(env_file):
