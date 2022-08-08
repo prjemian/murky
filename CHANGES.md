@@ -9,4 +9,11 @@
 
 2022-07-26
 
+- CI tests with Python versions: 3.7 - 3.10
+- add pyyaml packaging requirement
+
+### 0.0.1
+
+2022-07-26
+
 - Package renamed as `murky` (formerly `condatools`, `boiga`, and `water_moccasin`).
