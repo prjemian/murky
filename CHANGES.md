@@ -5,6 +5,10 @@
 
 ## Development
 
+### 0.0.4
+
+- CI tests with Python versions: 3.7 - 3.11
+
 ### 0.0.3
 
 2022-08-08
