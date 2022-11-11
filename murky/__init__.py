@@ -13,7 +13,7 @@ __license__ += " (see LICENSE file for details)"
 __platforms__ = "any"
 __zip_safe__ = False
 __exclude_project_dirs__ = "docs resources".split()
-__python_version_required__ = ">=3.7, <3.11"
+__python_version_required__ = ">=3.7, <3.12"
 
 __package_name__ = __project__
 __long_description__ = __description__
@@ -36,6 +36,7 @@ __classifiers__ = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Software Development",
     "Topic :: Utilities",
