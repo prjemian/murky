@@ -1,7 +1,8 @@
-name: boiga
+name: murky
 
 channels:
   - defaults
 
 dependencies:
   - pygithub
+  - pyyaml

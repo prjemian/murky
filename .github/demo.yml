@@ -1,0 +1,65 @@
+name: demo
+
+on:
+  push
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+jobs:
+
+  part1:
+    name: touch
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Step 1
+        run: |
+          ls -lAFgh
+
+      - name: Step 2
+        run: |
+          mkdir treasures
+          echo "something" > treasures/precious.txt
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: treasures
+          path: treasures
+
+      - name: ls
+        run: |
+          ls -lAFghR
+
+  part2:
+    name: waiting
+    runs-on: ubuntu-latest
+    needs: part1
+
+    steps:
+
+      - name: Step 1
+        run: |
+          sleep 10
+          echo "waited 10s"
+
+      - name: Step 2
+        run: |
+          echo "no wait"
+
+  part3:
+    name: list
+    runs-on: ubuntu-latest
+    needs: part2
+
+    steps:
+
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v3
+
+      - name: Step 1
+        run: |
+          ls -lAFghR

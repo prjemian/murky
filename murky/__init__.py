@@ -1,5 +1,5 @@
-__project__ = "boiga"
-__description__ = "The boiga package provides tools for working with conda packages."
+__project__ = "murky"
+__description__ = "The murky package provides tools for working with conda packages."
 __copyright__ = "2014-2022, Pete R. Jemian"
 __authors__ = [
     "Pete Jemian",
@@ -7,13 +7,13 @@ __authors__ = [
 __author__ = ", ".join(__authors__)
 # __institution__ = u""
 __author_email__ = "prjemian@gmail.com"
-__url__ = "https://github.com/prjemian/boiga/"
+__url__ = "https://github.com/prjemian/murky/"
 __license__ = "(c) " + __copyright__
 __license__ += " (see LICENSE file for details)"
 __platforms__ = "any"
 __zip_safe__ = False
 __exclude_project_dirs__ = "docs resources".split()
-__python_version_required__ = ">=3.8, <3.12"
+__python_version_required__ = ">=3.7, <3.12"
 
 __package_name__ = __project__
 __long_description__ = __description__
@@ -36,6 +36,7 @@ __classifiers__ = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Software Development",
     "Topic :: Utilities",

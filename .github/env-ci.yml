@@ -1,4 +1,4 @@
-name: boiga-ci
+name: murky-ci
 
 channels:
   - conda-forge

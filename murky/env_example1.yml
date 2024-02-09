@@ -1,6 +1,6 @@
-name: boiga_test_environment
+name: murky_test_environment
 
-# ./boiga_create.sh test.yml
+# ./murky_create.sh test.yml
 
 channels:
   - conda-forge
