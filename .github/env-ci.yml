@@ -10,4 +10,6 @@ dependencies:
   - pip
   - pygithub
   - pytest
-  - setuptools
+  - pytest-cov
+  - pyyaml
+  - setuptools    
