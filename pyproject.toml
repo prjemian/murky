@@ -49,7 +49,6 @@ classifiers = [
 [project.scripts]
 create_release_notes = "murky.create_release_notes:main"
 murky_tool = "murky.murky_tool:main"
-# FIXME:    "murky/murky_create.sh"
 
 [tool.black]
 line-length = 88
@@ -68,4 +67,8 @@ include_trailing_comma = true
 addopts = [
     "--import-mode=importlib",
 ]
+
+[tool.setuptools]
+script-files = ["murky/murky_create.sh"]
+
 [tool.setuptools_scm]
