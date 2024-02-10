@@ -37,16 +37,26 @@ jobs:
           fetch-depth: 0
 
       - name: Create Python ${{ matrix.python-version }} environment
-        uses: mamba-org/provision-with-micromamba@main
+        uses: mamba-org/setup-micromamba@v1
         with:
           cache-downloads: true
-          cache-env: true
           channel-priority: flexible
           environment-file: .github/env-ci.yml
           environment-name: anaconda-test-env-py-${{ matrix.python-version }}
+          condarc: |
+            channel-priority: flexible
+          init-shell: bash
           extra-specs: |
             python=${{ matrix.python-version }}
-
+          create-args: >-
+            pytest
+            pytest-cov
+            python=${{ matrix.python-version }}
+            pyyaml
+            setuptools-scm
+          cache-environment: true
+          cache-environment-key: env-key-${{ matrix.python-version }}
+    
       - name: Check Code Style
         run: |
           flake8
@@ -54,11 +64,21 @@ jobs:
           black murky/create_release_notes.py
           black setup.py
 
-      - name: Install code coverage requirements by pip
+      # - name: Install code coverage requirements by pip
+      #   run: |
+      #     # https://github.com/pradyunsg/furo/discussions/308#discussioncomment-3064061
+      #     pip install coverage coveralls
+
+      - name: Diagnostics
+        shell: bash -l {0}
         run: |
-          # https://github.com/pradyunsg/furo/discussions/308#discussioncomment-3064061
-          pip install coverage coveralls
-    
+          conda info
+          conda list
+          conda config --show-sources
+          conda config --show
+          conda env list
+          printenv | sort
+
       - name: Python Tests
         run: |
           coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
@@ -76,17 +96,21 @@ jobs:
           murky_tool pip murky/env_example1.yml
           murky_create.sh help
 
-      - name: Upload coverage data to coveralls.io
-        shell: bash -l {0}
-        run: |
-          micromamba list coveralls
-          which coveralls
-          coveralls debug
-          coveralls --service=github
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COVERALLS_FLAG_NAME: ${{ matrix.test-name }}
-          COVERALLS_PARALLEL: true
+      # - name: Micromamba Diagnostics
+      #   shell: bash -l {0}
+      #   run: |
+      #     echo "coveralls: '$(which coveralls)'"
+      #     micromamba list coveralls
+
+      # - name: Upload coverage data to coveralls.io
+      #   shell: bash -l {0}
+      #   run: |
+      #     coveralls debug
+      #     coveralls --service=github
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     COVERALLS_FLAG_NAME: ${{ matrix.test-name }}
+      #     COVERALLS_PARALLEL: true
 
   # https://coveralls-python.readthedocs.io/en/latest/usage/configuration.html#github-actions-support
   coveralls:
