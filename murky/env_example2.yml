@@ -82,7 +82,6 @@ dependencies:
   - sphinx
   - sphinxcontrib-napoleon
   - twine
-  - versioneer
   - mamba
   - micromamba
   - pygithub
