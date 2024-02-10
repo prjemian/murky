@@ -54,7 +54,7 @@ jobs:
             setuptools-scm
           cache-environment: true
           cache-environment-key: env-key-${{ matrix.python-version }}
-    
+
       - name: Check Code Style
         run: |
           flake8
@@ -94,6 +94,18 @@ jobs:
       #   run: |
       #     echo "coveralls: '$(which coveralls)'"
       #     micromamba list coveralls
+
+    - name: Run tests with pytest & coverage
+      shell: bash -l {0}
+      run: |
+        set -vxeuo pipefail
+        coverage run --concurrency=thread --parallel-mode -m pytest -vvv # --exitfirst .
+        coverage combine
+
+    - name: Coverage Report
+      shell: bash -l {0}
+      run: |
+        coverage report --precision 3
 
       # - name: Upload coverage data to coveralls.io
       #   shell: bash -l {0}
