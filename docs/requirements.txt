@@ -1,0 +1,4 @@
+pygithub
+pyyaml
+setuptools-scm
+sphinx-copybutton
