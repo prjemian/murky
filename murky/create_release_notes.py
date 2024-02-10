@@ -255,7 +255,7 @@ def report(title, repo, milestone, tags, pulls, issues, commits):
         for k, issue in sorted(issues.items(), key=isorter, reverse=True):
             if k not in pulls:
                 when = issue.closed_at.strftime("%Y-%m-%d")
-                labels = ", ".join([l.name for l in issue.labels])
+                labels = ", ".join([_label.name for _label in issue.labels])
                 print(
                     f"[#{issue.number}]({issue.html_url})"
                     f" | {when}"
@@ -309,7 +309,7 @@ if __name__ == "__main__":
 # -----------------------------------------------------------------------------
 # :author:    Pete R. Jemian
 # :email:     prjemian@gmail.com
-# :copyright: (c) 2014-2022, Pete R. Jemian
+# :copyright: (c) 2014-2024, Pete R. Jemian
 #
 # Distributed under the terms of the Creative Commons Attribution 4.0 International Public License.
 #

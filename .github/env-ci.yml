@@ -5,11 +5,12 @@ channels:
   - defaults
 
 dependencies:
-  - black>=22.1
   - coverage
   - coveralls
-  - flake8
   - pip
   - pygithub
   - pytest
+  - pytest-cov
+  - pyyaml
   - setuptools
+  - setuptools-scm

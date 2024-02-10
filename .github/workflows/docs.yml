@@ -39,15 +39,15 @@ jobs:
       run: |
         echo "The will be published from this workflow run."
 
-    - name: Set up Python 3.9
+    - name: Set up Python 3.11
       uses: actions/setup-python@v5
       with:
-        python-version: "3.9"
+        python-version: "3.11"
 
     - name: Install Sphinx build requirements
       run: |
         pip install \
-          -r requirements.txt \
+          -r ./docs/requirements.txt \
           pydata-sphinx-theme \
           sphinx-copybutton
 
@@ -55,12 +55,9 @@ jobs:
       run: |
         pip install --no-deps -e .
 
-    - name: Build and Commit
-      uses: sphinx-notes/pages@master
-      with:
-        # path to conf.py directory
-        documentation_path: docs/source
-
+    - name: Sphinx
+      run: TZ=UTC make -C docs html
+  
     - name: Publish (push gh-pages branch) only on demand
       if: ${{ github.event.inputs.deploy }}
       uses: ad-m/github-push-action@master

@@ -16,13 +16,40 @@ defaults:
     shell: bash -l {0}
 
 jobs:
-  test-matrix:
+
+  lint:
+    name: Linting & Code style
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install package
+        run: |
+          set -vxeuo pipefail
+          python -m pip install --upgrade pip
+          pip install ruff
+  
+      - name: Run ruff
+        uses: davidslusser/actions_python_ruff@v1.0.0
+        with:
+          # src: "."
+          # options: "--cov=src"
+          pip_install_command: "pip install -e .[dev]"
+          python_version: "3.11"
+
+  tests:
     name: CI py${{ matrix.python-version }}
+    needs: lint
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version:
-          - "3.7"
+          # - "3.7"
           - "3.8"
           - "3.9"
           - "3.10"  # not 3.10 which truncates to 3.1
@@ -47,24 +74,13 @@ jobs:
           init-shell: bash
           create-args: >-
             python=${{ matrix.python-version }}
-            pytest
-            pytest-cov
-            python=${{ matrix.python-version }}
-            pyyaml
-            setuptools-scm
           cache-environment: true
           cache-environment-key: env-key-${{ matrix.python-version }}
-
-      - name: Check Code Style
-        run: |
-          flake8
-          black murky/murky_tool.py
-          black murky/create_release_notes.py
-          black setup.py
 
       - name: Diagnostics
         shell: bash -l {0}
         run: |
+          set -vxeuo pipefail
           conda info
           conda list
           conda config --show-sources
@@ -78,11 +94,12 @@ jobs:
 
       - name: Install for functional testing
         run: |
-          python3 ./setup.py build sdist
-          python3 -m pip install .
+          set -vxeuo pipefail
+          python3 -m pip install -e .
 
       - name: Command Tests
         run: |
+          set -vxeuo pipefail
           murky_tool --help
           murky_tool name murky/env_example1.yml
           murky_tool conda murky/env_example1.yml
@@ -120,7 +137,7 @@ jobs:
   # https://coveralls-python.readthedocs.io/en/latest/usage/configuration.html#github-actions-support
   coveralls:
     name: Report unit test coverage to coveralls
-    needs: test-matrix
+    needs: tests
     runs-on: ubuntu-latest
     container: python:3-slim
 
