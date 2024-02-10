@@ -16,8 +16,34 @@ defaults:
     shell: bash -l {0}
 
 jobs:
-  test-matrix:
+
+  lint:
+    name: Linting & Code style
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff
+  
+      - name: Run ruff
+        uses: davidslusser/actions_python_ruff@v1.0.0
+        with:
+          # src: "."
+          # options: "--cov=src"
+          pip_install_command: "pip install -e .[dev]"
+          python_version: "3.11"
+
+  tests:
     name: CI py${{ matrix.python-version }}
+    needs: lint
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -54,13 +80,6 @@ jobs:
             setuptools-scm
           cache-environment: true
           cache-environment-key: env-key-${{ matrix.python-version }}
-
-      - name: Check Code Style
-        run: |
-          flake8
-          black murky/murky_tool.py
-          black murky/create_release_notes.py
-          black setup.py
 
       - name: Diagnostics
         shell: bash -l {0}
