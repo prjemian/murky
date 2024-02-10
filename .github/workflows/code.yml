@@ -95,8 +95,7 @@ jobs:
       - name: Install for functional testing
         run: |
           set -vxeuo pipefail
-          python3 ./setup.py build sdist
-          python3 -m pip install .
+          python3 -m pip install -e .
 
       - name: Command Tests
         run: |
