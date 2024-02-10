@@ -99,13 +99,13 @@ jobs:
       - name: Coverage Report
         shell: bash -l {0}
         run: |
-          coverage report --precision 3
+          python -m coverage report --precision 3
 
       - name: Upload coverage data to coveralls.io
         shell: bash -l {0}
         run: |
-          coveralls debug
-          coveralls --service=github
+          python -m coveralls debug
+          python -m coveralls --service=github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_FLAG_NAME: ${{ matrix.test-name }}
