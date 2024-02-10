@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.packaging]
 github_org = "prjemian"
-copyright = "2014-2022, Pete R. Jemian"
+copyright = "2014-2024, Pete R. Jemian"
 
 [project]
 name = "murky"
