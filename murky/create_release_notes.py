@@ -96,14 +96,14 @@ def get_release_info(token, base_tag_name, head_branch_name, milestone_name):
     repo = user.get_repo(repository_name)
     logger.debug(f"repo: {repo}")
 
-    milestones = [
-        m for m in repo.get_milestones(state="all") if m.title == milestone_name
-    ]
-    if len(milestones) == 0:
+    milestone = None
+    for m in repo.get_milestones(state="all"):
+        if m.title == milestone_name:
+            milestone = m
+    if milestone is None:
         msg = f"Could not find milestone: {milestone_name}"
         logger.error(msg)
         raise ValueError(msg)
-    milestone = milestones[0]
     logger.debug(f"milestone: {milestone}")
 
     compare = repo.compare(base_tag_name, head_branch_name)
@@ -118,11 +118,8 @@ def get_release_info(token, base_tag_name, head_branch_name, milestone_name):
         if t.commit.sha in commits:
             tags[t.name] = t
         elif t.name == base_tag_name:
-            # PyGitHub oddity:
-            #   t.commit == commit
-            #   t.commit.last_modified != commit.last_modified
             commit = repo.get_commit(t.commit.sha)
-            dt = str2time(commit.last_modified)
+            dt = commit.last_modified_datetime
             earliest = min(dt, earliest or dt)
     logger.debug(f"# tags: {len(tags)}")
 
@@ -172,19 +169,6 @@ def parse_command_line():
     return parser.parse_args()
 
 
-def str2time(time_string):
-    """
-    Convert date/time string to datetime object.
-
-    input string example: ``Tue, 20 Dec 2016 17:35:40 GMT``
-    """
-    if time_string is None:
-        msg = f"need valid date/time string, not: {time_string}"
-        logger.error(msg)
-        raise ValueError(msg)
-    return datetime.datetime.strptime(time_string, "%a, %d %b %Y %H:%M:%S %Z")
-
-
 def report(title, repo, milestone, tags, pulls, issues, commits):
     hbar = "-" * 3
     print(f"## {title}")
@@ -211,9 +195,15 @@ def report(title, repo, milestone, tags, pulls, issues, commits):
     else:
         print("tag | date | commit")
         print(hbar, " | ", hbar, " | ", hbar)
-        for k, tag in sorted(tags.items(), reverse=True):
+
+        def sorter(item):
+            tag = item[1]
             commit = repo.get_commit(tag.commit.sha)
-            when = str2time(commit.last_modified).strftime("%Y-%m-%d")
+            return commit.last_modified_datetime
+
+        for k, tag in sorted(tags.items(), reverse=True, key=sorter):
+            commit = repo.get_commit(tag.commit.sha)
+            when = commit.last_modified_datetime.strftime("%Y-%m-%d")
             base_url = tag.commit.html_url
             tag_url = "/".join(base_url.split("/")[:-2] + ["releases", "tag", k])
             print(

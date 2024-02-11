@@ -17,3 +17,6 @@ MANIFEST
 
 # Microsoft Visual Studio Code
 .vscode/
+
+# local developer resources
+dev_*
