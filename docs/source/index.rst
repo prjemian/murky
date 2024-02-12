@@ -20,6 +20,10 @@ Example code::
    :maxdepth: 2
    :caption: Contents:
 
+   create_release_notes
+   murky_tool
+   murky_create
+
 
 Indices and tables
 ==================

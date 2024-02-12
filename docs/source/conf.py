@@ -10,7 +10,7 @@ import tomllib
 sys.path.append(
     str(pathlib.Path(__file__).parent.parent.parent)
 )
-import murky as pkg  # noqa
+import murky  # noqa
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -27,7 +27,7 @@ author = metadata["authors"][0]["name"]
 description = metadata["description"]
 rst_prolog = f".. |author| replace:: {author}"
 github_url = f"https://github.com/{gh_org}/{project}"
-release = pkg.__version__
+release = murky.__version__
 # release = version.split("+")[0]
 version = ".".join(release.split(".")[:2])  # noqa
 version_match = f"v{release}"
@@ -36,7 +36,9 @@ version_match = f"v{release}"
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = """
-sphinx_copybutton
+    sphinx_copybutton
+    sphinx.ext.autodoc
+    sphinx.ext.autosummary
 """.split()
 
 templates_path = ["_templates"]
