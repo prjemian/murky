@@ -4,6 +4,16 @@
 Create detailed release notes for a new release of a GitHub repository.
 
 Run from the root directory of a package.
+
+.. autosummary::
+
+    ~main
+    ~findGitConfigFile
+    ~_parse_git_url
+    ~getRepositoryInfo
+    ~get_release_info
+    ~parse_command_line
+    ~report
 """
 
 # Requires:
@@ -29,9 +39,9 @@ logger = logging.getLogger("create_release_notes")
 
 def findGitConfigFile():
     """
-    return full path to .git/config file
+    Return full path to .git/config file.
 
-    must be in current working directory or some parent directory
+    Must be in current working directory or some parent directory.
 
     This is a simplistic search that could be improved by using
     an open source package.
@@ -52,9 +62,11 @@ def findGitConfigFile():
     raise ValueError(msg)
 
 
-def parse_git_url(url):
+def _parse_git_url(url):
     """
-    return (organization, repository) tuple from url line of .git/config file
+    Return (organization, repository) tuple from url line of .git/config file.
+
+    Called from 'getRepositoryInfo()'.
     """
     if url.startswith("git@"):  # deal with git@github.com:org/repo.git
         url = url.split(":")[1]
@@ -64,7 +76,7 @@ def parse_git_url(url):
 
 def getRepositoryInfo():
     """
-    return (organization, repository) tuple from .git/config file
+    Return (organization, repository) tuple from .git/config file.
 
     This is a simplistic search that could be improved by using
     an open source package.
@@ -82,7 +94,7 @@ def getRepositoryInfo():
                     msg = "Not a GitHub repo: " + url
                     logger.error(msg)
                     raise ValueError(msg)
-                return parse_git_url(url)
+                return _parse_git_url(url)
 
 
 def get_release_info(token, base_tag_name, head_branch_name, milestone_name):
@@ -170,6 +182,7 @@ def parse_command_line():
 
 
 def report(title, repo, milestone, tags, pulls, issues, commits):
+    """Print results to stdout."""
     hbar = "-" * 3
     print(f"## {title}")
     print("")
@@ -274,6 +287,7 @@ def report(title, repo, milestone, tags, pulls, issues, commits):
 
 
 def main(base=None, head=None, milestone=None, token=None, debug=False):
+    """Command-line application program."""
     if debug:
         base_tag_name = base
         head_branch_name = head

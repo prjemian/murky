@@ -1,5 +1,10 @@
 [
     {
+        "name": "0.0.5 (pre-release)",
+        "version": "0.0.5",
+        "url": "https://prjemian.github.io/murky/"
+    },
+    {
         "name": "0.0.4 (pre-release)",
         "version": "0.0.4",
         "url": "https://prjemian.github.io/murky/"
