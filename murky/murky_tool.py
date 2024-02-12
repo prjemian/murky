@@ -8,13 +8,6 @@ import argparse
 import yaml
 
 
-def read_yml(env_file):
-    # print(f"{env_file}")
-    with open(env_file, "r") as f:
-        all_specs = yaml.safe_load(f)
-    return all_specs
-
-
 def print_pip_requirements(specs):
     for req in specs["dependencies"]:
         # print(req)
@@ -57,7 +50,11 @@ def main():
         name=print_environment_name,
         pip=print_pip_requirements,
     )[args.function]
-    func(read_yml(args.env_file))
+
+    with open(args.env_file, "r") as f:
+        all_specs = yaml.safe_load(f)
+
+    func(all_specs)
 
 
 if __name__ == "__main__":
