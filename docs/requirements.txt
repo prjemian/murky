@@ -1,3 +1,4 @@
+pydata-sphinx-theme
 pygithub
 pyyaml
 setuptools-scm

@@ -22,6 +22,11 @@ on:
 # see: https://sphinx-notes.github.io/pages/
 # see: https://github.com/marketplace/actions/sphinx-to-github-pages
 
+defaults:
+  run:
+    shell: bash -l {0}
+    # set -vxeuo pipefail
+
 jobs:
 
   pages:
@@ -29,10 +34,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@master
-      with:
-        fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
 
     - name: Deploy Information
       if: ${{ github.event.inputs.deploy }}
@@ -44,23 +45,32 @@ jobs:
       with:
         python-version: "3.11"
 
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
+
     - name: Install Sphinx build requirements
-      run: |
-        pip install \
-          -r ./docs/requirements.txt \
-          pydata-sphinx-theme \
-          sphinx-copybutton
+      run: pip install  -r ./docs/requirements.txt
 
     - name: Install our package
-      run: |
-        pip install --no-deps -e .
+      run: pip install --no-deps -e . -vv
 
     - name: Sphinx
       run: TZ=UTC make -C docs html
-  
-    - name: Publish (push gh-pages branch) only on demand
+
+    - name: Deploy (to gh-pages branch) only on demand
+      uses: peaceiris/actions-gh-pages@v3
       if: ${{ github.event.inputs.deploy }}
-      uses: ad-m/github-push-action@master
       with:
+        publish_branch: gh-pages
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: gh-pages
+        publish_dir: docs/build/html
+        force_orphan: true
+  
+    # - name: Publish (push gh-pages branch) only on demand
+    #   if: ${{ github.event.inputs.deploy }}
+    #   uses: ad-m/github-push-action@master
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     branch: gh-pages
