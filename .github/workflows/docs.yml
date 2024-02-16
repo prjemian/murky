@@ -67,3 +67,4 @@ jobs:
         publish_dir: docs/build/html
         destination_dir: latest
         force_orphan: true
+        keep_files: true
