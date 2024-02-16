@@ -77,5 +77,5 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: docs/build/html
         # force_orphan: true
-        # destination_dir: latest
-        # keep_files: true
+        destination_dir: latest
+        keep_files: true
