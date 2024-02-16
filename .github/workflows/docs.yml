@@ -34,6 +34,11 @@ jobs:
 
     steps:
 
+    - name: Set env vars
+      run: |
+        export REPOSITORY_NAME=${GITHUB_REPOSITORY#*/}  # just the repo, as opposed to org/repo
+        echo "REPOSITORY_NAME=${REPOSITORY_NAME}" >> $GITHUB_ENV
+
     - name: Deploy Information
       if: ${{ github.event.inputs.deploy }}
       run: |
@@ -58,13 +63,19 @@ jobs:
     - name: Sphinx
       run: TZ=UTC make -C docs clean html
 
+    - name: Upload Docs ZIP file as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ env.REPOSITORY_NAME }}-docs
+        path: docs/build/html/
+
     - name: Deploy (to gh-pages branch) only on demand
-      uses: peaceiris/actions-gh-pages@v3
       if: ${{ github.event.inputs.deploy }}
+      uses: peaceiris/actions-gh-pages@v3
       with:
         publish_branch: gh-pages
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: docs/build/html
-        destination_dir: latest
-        force_orphan: true
-        keep_files: true
+        # force_orphan: true
+        # destination_dir: latest
+        # keep_files: true
