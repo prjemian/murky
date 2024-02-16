@@ -4,7 +4,7 @@
 murky_create.sh
 ===============
 
-Obsolete.
+Deprecated.
 
 The ``murky_create.sh`` bash shell script is a hybrid micromamba/conda
 environment creator. It creates an explicit conda environment file (specific

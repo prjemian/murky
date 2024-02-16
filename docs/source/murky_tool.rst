@@ -4,7 +4,7 @@
 murky_tool
 ==========
 
-Obsolete.
+Deprecated.
 
 Tool used in support of :ref:`murky_create`.
 
