@@ -5,6 +5,12 @@
 
 ## Development
 
+### 0.0.5
+
+- Add update_copyright_date
+- add python-magic packaging requirement
+- CI tests with Python versions: 3.8 - 3.12
+
 ### 0.0.4
 
 - CI tests with Python versions: 3.7 - 3.11

@@ -8,20 +8,30 @@ for lines that contain the pattern of ``SYMBOL YEARS OWNER`` (case-independent)
 and updates ``YEARS`` to include the current year. YEARS is a list or range of
 4-digit numbers.
 
-Example copyright text::
+.. Any content after this line will not appear in the command-line help.
 
-    Copyright (c) 1215, 1871, 1973, 1975-1991 Some Project Owner
+Command Line Application
 
-In 2024, executing command
-  'update_copyright_date.py -s "(c)" . Owner'
-in the project's directory, YEARS evaluates to '1215, 1871, 1973, 1975-1991'
-and the copyright text would be updated to::
+.. autosummary::
 
-    Copyright (c) 1215, 1871, 1973, 1975-1991, 2024 Some Project Owner
+    ~main
+    ~command_args
 
-This is a comparable bash command to find all matching lines::
+Public API
 
-  grep -iIR "${SYMBOL}" | grep -i "${OWNER}"
+.. autosummary::
+    ~find_source_files
+    ~update
+
+Internal Functions
+
+.. autosummary::
+    ~revise_copyright_line
+    ~is_recognized_text_file
+    ~sift_file_list
+    ~qualify_inputs
+    ~setup_logging
+
 """
 # See copyright text at bottom of this file for another example.
 
@@ -57,36 +67,43 @@ ACCEPTABLE_MIME_TYPES = """
 logger = None  # created later, after verbosity is determined
 
 
-def revise_copyright_line(text, symbol, owner, filename, number):
+def revise_copyright_line(line, symbol, owner, filename, number):
+    """Update the copyright year on one line of filename."""
     # find the part of the text with the date
-    p1 = text.lower().find(symbol.lower()) + len(symbol)
-    p2 = text.lower().find(owner.lower(), p1)
+    p1 = line.lower().find(symbol.lower()) + len(symbol)
+    p2 = line.lower().find(owner.lower(), p1)
 
     # find the 4-digit year or years in the fragment
-    fragment = text[p1:p2]
+    fragment = line[p1:p2]
     years = re.findall(r"\d\d\d\d", fragment)
     if len(years) == 0:
-        raise ValueError(f"({filename}, {number}) No copyright year(s) in {text!r}")
+        raise ValueError(f"({filename}, {number}) No copyright year(s) in {line!r}")
     # offset of the first year
     p3 = p1 + fragment.find(years[0])
     # offset after the last year
     p4 = p1 + fragment.find(years[-1]) + len(years[-1])
 
     # build the new list or range of years
+    # TODO: YEAR could be a command-line option
     if len(years) == 1:
         if YEAR != years[-1]:
             years = f"{years[0]}-{YEAR}"
+            # TODO:
+            # if inclusive:
+            #     years = f"{years[0]}-{YEAR}"
+            # else:
+            #     years = ", ".join([years[0], YEAR])
     elif len(years) == 2:
         years = f"{years[0]}-{YEAR}"
     else:
         if YEAR != years[-1]:
             years = ", ".join(years + [YEAR])
 
-    return f"{text[:p3]}{years}{text[p4:]}"
+    return f"{line[:p3]}{years}{line[p4:]}"
 
 
 def update(filename, owner, symbol=COPYRIGHT_SYMBOL, dry_run=False):
-    """update the copyright year in the file"""
+    """Update the copyright year in filename."""
     global logger
 
     logger = logger or logging.getLogger(__name__)
@@ -95,7 +112,8 @@ def update(filename, owner, symbol=COPYRIGHT_SYMBOL, dry_run=False):
         return
 
     # fmt: off
-    text_file_lines = open(filename).readlines()
+    with open(filename) as fp:
+        text_file_lines = fp.readlines()
     matching_line_numbers = [
         number
         for number, line in enumerate(text_file_lines)
@@ -118,7 +136,7 @@ def update(filename, owner, symbol=COPYRIGHT_SYMBOL, dry_run=False):
         text_file_lines[number] = revision
 
     if not update_available:
-        logger.debug("No changes necessary.")
+        logger.info(f"No changes necessary: {filename}")
         return
 
     logger.info("Update: %s", filename)
@@ -130,7 +148,7 @@ def update(filename, owner, symbol=COPYRIGHT_SYMBOL, dry_run=False):
 
 
 def find_source_files(path):
-    """walk the source_path directories accumulating files to be checked"""
+    """Return a list of all files in path and all of its subdirectories."""
     files = []
 
     for ignore_dir in IGNORE_DIRECTORIES:
@@ -146,7 +164,7 @@ def find_source_files(path):
     return files
 
 
-def is_acceptable_as_text_file(path):
+def is_recognized_text_file(path):
     """Is the file on this path acceptable as text?"""
     mime = magic.Magic(mime=True).from_file(path)
     # Note: identifies zero-length files as mime="inode/x-empty"
@@ -161,18 +179,18 @@ def is_acceptable_as_text_file(path):
 
 
 def sift_file_list(file_list):
-    """remove known non-text files and paths"""
+    """From a list of all files, return a list of the files recognized as text."""
     # fmt: off
     return [
         fn
         for fn in file_list
-        if is_acceptable_as_text_file(fn)
+        if is_recognized_text_file(fn)
     ]
     # fmt: on
 
 
 def qualify_inputs(root_path):
-    """raise error if this program cannot continue, based on the inputs"""
+    """Raise error if this program cannot continue, based on the inputs."""
     if not root_path.exists():
         raise FileExistsError(f"Cannot find {root_path}")
 
@@ -187,7 +205,13 @@ def command_args():
     from . import __version__
 
     doc = __doc__.strip().splitlines()[0]
-    epilog = "\n".join(__doc__.strip().splitlines()[2:])
+    epilog = []
+    for line in __doc__.strip().splitlines()[2:]:
+        if line.startswith(".. "):
+            break
+        epilog.append(line)
+    epilog = "\n".join(epilog)
+
     parser = argparse.ArgumentParser(
         prog=sys.argv[0],
         description=doc,
@@ -236,7 +260,7 @@ def setup_logging(verbosity):
     """
     Set up the logging subsystem.
 
-    .. see:: https://xahteiwi.eu/resources/hints-and-kinks/python-cli-logging-options/
+    :see: https://xahteiwi.eu/resources/hints-and-kinks/python-cli-logging-options/
     """
     base_loglevel = 30
     verbosity = min(verbosity, 2)
@@ -246,7 +270,7 @@ def setup_logging(verbosity):
 
 def main():
     """
-    Standard command-line processing.
+    Entry point for command-line ``update_copyright_date`` application.
 
     * source directory named as command line argument
     * target directory is specified (or defaults to present working directory)

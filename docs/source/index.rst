@@ -9,6 +9,7 @@ The ``murky`` package provides tools for working with conda packages.
    :caption: Contents:
 
    create_release_notes
+   update_copyright_date
 
 version:
    |version|
