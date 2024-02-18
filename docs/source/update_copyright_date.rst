@@ -26,7 +26,6 @@ Consider these examples::
     Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
     # Copyright (c) 2006, 2008 Junio C Hamano
     Copyright (C) 2000, 2001, 2002, 2007, 2008 Free Software Foundation, Inc.
-    Copyright (C) 2000 R. Osborn, M. Koennecke, P. Klosowski
     copyright = "(c) 2014-2024, Project Copyright Owner"
     Copyright 2015 Jane Doe
     Copyright (c) 1215, 1871, 1973, 1975-1991, 2024 Some Project Owner
@@ -120,7 +119,7 @@ Help for how to use the command-line program:
     <embed>
     <pre>
     $ <em>update_copyright_date <b>--help</b></em>
-    usage: update_copyright_date [-h] [-s [SYMBOL]] [-d] [-v] [-q] [-V] root_dir owner
+    usage: update_copyright_date [-h] [-s [SYMBOL]] [-y [YEAR]] [-i] [-d] [-v] [-q] [-V] root_dir owner
 
     Update the copyright date in all project text files.
 
@@ -131,7 +130,9 @@ Help for how to use the command-line program:
     options:
     -h, --help            show this help message and exit
     -s [SYMBOL], --symbol [SYMBOL]
-                            Copyright symbol text. Default '(C)'
+                            Copyright symbol text. Default: '(C)'
+    -y [YEAR], --year [YEAR]
+                            Final copyright year. Default: '2024'
     -d, --dry-run         Don't update any files. Default: False
     -v, --verbose         verbose output (repeat for increased verbosity)
     -q, --quiet           quiet output (show errors only), overrides -v option
@@ -190,6 +191,20 @@ in the command line:
 
 Quotes are necessary around the text ``Jane Doe`` to indicate to the shell that SYMBOL has
 both words.
+
+``-y``, ``--year``
+++++++++++++++++++++
+
+The new year to be added. The default is the current year.
+
+.. raw:: html
+
+    <embed>
+    <pre>
+    $ <em>update_copyright_date -d <b>--year 2125</b> . Jemian</em>
+    $
+    </pre>
+    </embed>
 
 ``-d``, ``--dry-run``
 +++++++++++++++++++++
