@@ -105,6 +105,7 @@ jobs:
           murky_tool conda murky/env_example1.yml
           murky_tool pip murky/env_example1.yml
           murky_create.sh help
+          update_copyright_date --help
 
       - name: Run tests with pytest & coverage
         shell: bash -l {0}

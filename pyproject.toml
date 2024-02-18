@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.packaging]
 github_org = "prjemian"
-copyright = "2014-2024, Pete R. Jemian"
+copyright = "(c) 2014-2024, Pete R. Jemian"
 
 [project]
 name = "murky"
@@ -49,6 +49,7 @@ classifiers = [
 [project.scripts]
 create_release_notes = "murky.create_release_notes:main"
 murky_tool = "murky.murky_tool:main"
+update_copyright_date = "murky.update_copyright_date:main"
 
 [tool.black]
 line-length = 88
