@@ -26,11 +26,14 @@ Public API
 Internal Functions
 
 .. autosummary::
-    ~revise_copyright_line
+    ~find_years_indices
     ~is_recognized_text_file
-    ~sift_file_list
     ~qualify_inputs
+    ~revise_copyright_line
     ~setup_logging
+    ~sift_file_list
+    ~UnexpectedSeparatorError
+    ~YearsNotFound
 
 """
 # See copyright text at bottom of this file for another example.
@@ -43,8 +46,9 @@ import sys
 
 import magic
 
-YEAR = str(datetime.datetime.now().year)
 COPYRIGHT_SYMBOL = "(C)"
+THIS_YEAR = str(datetime.datetime.now().year)
+LAST_YEAR = str(int(THIS_YEAR) - 1)
 
 _p = pathlib.Path(__file__).parent.parts[-1]
 IGNORE_DIRECTORIES = f"""
@@ -67,8 +71,16 @@ ACCEPTABLE_MIME_TYPES = """
 logger = None  # created later, after verbosity is determined
 
 
-def revise_copyright_line(line, symbol, owner, filename, number):
-    """Update the copyright year on one line of filename."""
+class UnexpectedSeparatorError(ValueError):
+    """Separator between years in copyright notice was not expected."""
+
+
+class YearsNotFound(ValueError):
+    """Did not find list or range of years in matching copyright line."""
+
+
+def find_years_indices(line, symbol, owner):
+    """Return the start and end indices of the copyright years in the text."""
     # find the part of the text with the date
     p1 = line.lower().find(symbol.lower()) + len(symbol)
     p2 = line.lower().find(owner.lower(), p1)
@@ -77,32 +89,69 @@ def revise_copyright_line(line, symbol, owner, filename, number):
     fragment = line[p1:p2]
     years = re.findall(r"\d\d\d\d", fragment)
     if len(years) == 0:
-        raise ValueError(f"({filename}, {number}) No copyright year(s) in {line!r}")
+        raise YearsNotFound(f"Copyright year(s) not found: {line!r}")
     # offset of the first year
     p3 = p1 + fragment.find(years[0])
     # offset after the last year
     p4 = p1 + fragment.find(years[-1]) + len(years[-1])
-
-    # build the new list or range of years
-    # TODO: YEAR could be a command-line option
-    if len(years) == 1:
-        if YEAR != years[-1]:
-            years = f"{years[0]}-{YEAR}"
-            # TODO:
-            # if inclusive:
-            #     years = f"{years[0]}-{YEAR}"
-            # else:
-            #     years = ", ".join([years[0], YEAR])
-    elif len(years) == 2:
-        years = f"{years[0]}-{YEAR}"
-    else:
-        if YEAR != years[-1]:
-            years = ", ".join(years + [YEAR])
-
-    return f"{line[:p3]}{years}{line[p4:]}"
+    return years, p3, p4
 
 
-def update(filename, owner, symbol=COPYRIGHT_SYMBOL, dry_run=False):
+def revise_copyright_line(line, symbol, owner, year):
+    """
+    Update the copyright year on this line.
+
+    PARAMETERS
+
+    line : *str*
+        Line of text that contains a copyright notice.
+    symbol : *str*
+        The text to be found *before* the text with the years.
+    owner : *str*
+        The text to be found *after* the text with the years.
+    year : *str*
+        Line of text that contains a copyright notice.
+    """
+    previous_year = str(int(year) - 1)
+    years_list, start_index, end_index = find_years_indices(line, symbol, owner)
+    # At this point, years is a non-empty list of 4-digit years (str).
+    years_str = line[start_index:end_index]
+
+    if year not in years_list:
+        if len(years_list) == 1:
+            # note: years_str == years_list[0] == years_list[-1]
+            if years_str == previous_year:
+                years_str = f"{years_str}-{year}"
+            else:
+                years_str = f"{years_str}, {year}"
+        else:  # more than one year
+            if years_list[-1] == previous_year:
+                # Check if the last year was part of a hyphenated or comma-separated list.
+                index_year1 = years_str.find(years_list[-2])
+                index_year2 = years_str.find(years_list[-1])
+                separator = years_str[index_year1 + len(years_list[-2]) : index_year2]
+                if separator.strip() == "-":
+                    years_str = (
+                        f"{years_str[:index_year1]}{years_list[-2]}{separator}{year}"
+                    )
+                elif separator.strip() == ",":
+                    years_str = f"{years_str}-{year}"
+                else:
+                    raise UnexpectedSeparatorError(f"Unexpected {separator=!r}")
+            else:
+                years_str = f"{years_str}, {year}"
+
+    # Splice the years back into the line.
+    return f"{line[:start_index]}{years_str}{line[end_index:]}"
+
+
+def update(
+    filename,
+    owner,
+    symbol=COPYRIGHT_SYMBOL,
+    dry_run=False,
+    year=THIS_YEAR,
+):
     """Update the copyright year in filename."""
     global logger
 
@@ -124,27 +173,34 @@ def update(filename, owner, symbol=COPYRIGHT_SYMBOL, dry_run=False):
     ]
     # fmt: on
     if len(matching_line_numbers) == 0:
+        logger.debug("No matching copyright notices: %s", filename)
         return
 
-    update_available = False
+    changes = {}  # key: line number, value: revised text for this line
     for number in matching_line_numbers:
         text = text_file_lines[number]
-        revision = revise_copyright_line(text, symbol, owner, filename, number)
+        try:
+            revision = revise_copyright_line(text, symbol, owner, year)
+        except (UnexpectedSeparatorError, YearsNotFound) as exinfo:
+            logger.error("(%s,%d) %s", filename, number, exinfo)
+            continue
         if text != revision:
-            update_available = True
+            changes[number] = revision
         logger.debug("(%s,%d):\n---: %r\n+++: %r", filename, number, text, revision)
-        text_file_lines[number] = revision
 
-    if not update_available:
-        logger.info(f"No changes necessary: {filename}")
+    if len(changes) == 0:
+        logger.debug("No changes necessary: %s", filename)
         return
 
-    logger.info("Update: %s", filename)
     if dry_run:
-        logger.debug("Dry run: original file not changed.")
-    else:
-        with open(filename, "w") as fp:
-            fp.writelines(text_file_lines)
+        logger.debug("Dry run: original file not changed: %s", filename)
+        return
+
+    logger.info("Update with %d line(s) changed: %s", len(changes), filename)
+    for number, revision in changes.items():
+        text_file_lines[number] = revision
+    with open(filename, "w") as fp:
+        fp.writelines(text_file_lines)
 
 
 def find_source_files(path):
@@ -226,7 +282,15 @@ def command_args():
         nargs="?",
         default=COPYRIGHT_SYMBOL,
         action="store",
-        help=f"Copyright symbol text.  Default {COPYRIGHT_SYMBOL!r}",
+        help=f"Copyright symbol text.  Default: {COPYRIGHT_SYMBOL!r}",
+    )
+    parser.add_argument(
+        "-y",
+        "--year",
+        nargs="?",
+        default=None,
+        action="store",
+        help=f"Final copyright year.  Default: {THIS_YEAR!r}",
     )
     parser.add_argument(
         "-d",
@@ -286,7 +350,13 @@ def main():
 
     file_list = sift_file_list(find_source_files(root_path))
     for fn in file_list:
-        update(fn, cli.owner, symbol=cli.symbol, dry_run=cli.dry_run)
+        update(
+            fn,
+            cli.owner,
+            symbol=cli.symbol,
+            dry_run=cli.dry_run,
+            year=cli.year,
+        )
 
 
 if __name__ == "__main__":
