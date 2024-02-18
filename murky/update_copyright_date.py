@@ -56,8 +56,10 @@ IGNORE_DIRECTORIES = f"""
     {_p}/build
     {_p}/dist
     {_p}/docs/build
+    {_p}/.pytest_cache
     {_p}/.ruff_cache
     {_p}/.vscode
+    /__pycache__
 """.strip().split()
 
 ACCEPTABLE_MIME_TYPES = """
