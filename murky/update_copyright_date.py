@@ -51,13 +51,15 @@ THIS_YEAR = str(datetime.datetime.now().year)
 LAST_YEAR = str(int(THIS_YEAR) - 1)
 
 _p = pathlib.Path(__file__).parent.parts[-1]
-IGNORE_DIRECTORIES = f"""
+IGNORE_THESE_PATHS = f"""
     {_p}/.git
     {_p}/build
     {_p}/dist
     {_p}/docs/build
+    {_p}/.pytest_cache
     {_p}/.ruff_cache
     {_p}/.vscode
+    /__pycache__
 """.strip().split()
 
 ACCEPTABLE_MIME_TYPES = """
@@ -207,14 +209,14 @@ def find_source_files(path):
     """Return a list of all files in path and all of its subdirectories."""
     files = []
 
-    for ignore_dir in IGNORE_DIRECTORIES:
+    for ignore_dir in IGNORE_THESE_PATHS:
         if str(path).endswith(ignore_dir):
             return []
 
-    for item in path.iterdir():
-        if item.is_file():
-            files.append(item)
-        if item.is_dir() and item.name != ".git":
+    if path.is_file():
+        files.append(path)
+    elif path.is_dir():
+        for item in path.iterdir():
             files += find_source_files(item)
 
     return files
@@ -250,8 +252,8 @@ def qualify_inputs(root_path):
     if not root_path.exists():
         raise FileExistsError(f"Cannot find {root_path}")
 
-    if not root_path.is_dir():
-        raise RuntimeError(f"Not a directory: {root_path}")
+    if not (root_path.is_dir() or root_path.is_file()):
+        raise RuntimeError(f"Not a directory or file: {root_path}")
 
 
 def command_args():
