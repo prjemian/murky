@@ -23,7 +23,9 @@ Create detailed release notes for a new release of a GitHub repository.
     -h, --help     show this help message and exit
     --head [HEAD]  name of tag, branch, SHA to end the range (default="master")
 
-source code documentation
+--------
+
+Source Code Documentation
 =========================
 
 .. automodule:: murky.create_release_notes
