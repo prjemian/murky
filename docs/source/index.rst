@@ -18,12 +18,12 @@ release:
 published:
    |today|
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Deprecated Contents:
+.. .. toctree::
+..    :maxdepth: 2
+..    :caption: Deprecated Contents:
 
-   murky_tool
-   murky_create
+..    murky_tool
+..    murky_create
 
 -----
 

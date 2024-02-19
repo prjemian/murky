@@ -49,7 +49,6 @@ jobs:
     strategy:
       matrix:
         python-version:
-          # - "3.7"
           - "3.8"
           - "3.9"
           - "3.10"  # not 3.10 which truncates to 3.1
@@ -100,11 +99,7 @@ jobs:
       - name: Command Tests
         run: |
           set -vxeuo pipefail
-          murky_tool --help
-          murky_tool name murky/env_example1.yml
-          murky_tool conda murky/env_example1.yml
-          murky_tool pip murky/env_example1.yml
-          murky_create.sh help
+          create_release_notes --help
           update_copyright_date --help
 
       - name: Run tests with pytest & coverage

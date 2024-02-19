@@ -5,7 +5,13 @@
 
 ## Development
 
+### 0.0.6
+
+* Deprecate (and disable) 'murky_create' and 'murky-tool'
+
 ### 0.0.5
+
+2024-02-18
 
 - Add update_copyright_date
 - add python-magic packaging requirement
