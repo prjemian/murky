@@ -28,38 +28,36 @@ Run from the root directory of a package.
 
 import argparse
 import datetime
-import github
 import logging
-import os
+import pathlib
 
+import github
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("create_release_notes")
 
 
-def findGitConfigFile():
+def findGitConfigFile(path=None):
     """
-    Return full path to .git/config file.
+    Return full path to ``ROOT/.git/config`` file.
 
-    Must be in current working directory or some parent directory.
+    Supplied 'path' must be in the ROOT directory or a subdirectory.
 
     This is a simplistic search that could be improved by using
     an open source package.
-
-    Needs testing for when things are wrong.
     """
-    path = os.getcwd()
-    for _i in range(99):
-        config_file = os.path.join(path, ".git", "config")
-        if os.path.exists(config_file):
-            return config_file  # found it!
+    path = pathlib.Path(path or pathlib.Path.cwd())
+    original_path = path
+    while path != path.parent:
+        config_path = path / ".git" / "config"
+        if config_path.exists():
+            return config_path
+        path = path.parent
 
-        # next, look in the parent directory
-        path = os.path.abspath(os.path.join(path, ".."))
-
-    msg = "Could not find .git/config file in any parent directory."
-    logger.error(msg)
-    raise ValueError(msg)
+    raise FileNotFoundError(
+        f"Git config file '.git/config' not found in"
+        f" {original_path!r} or any its parents."
+    )
 
 
 def _parse_git_url(url):
@@ -74,16 +72,14 @@ def _parse_git_url(url):
     return org, repo
 
 
-def getRepositoryInfo():
+def getRepositoryInfo(path=None):
     """
     Return (organization, repository) tuple from .git/config file.
 
     This is a simplistic search that could be improved by using
     an open source package.
-
-    Needs testing for when things are wrong.
     """
-    config_file = findGitConfigFile()
+    config_file = findGitConfigFile(pathlib.Path(path or pathlib.Path.cwd()))
 
     with open(config_file, "r") as f:
         for line in f.readlines():
