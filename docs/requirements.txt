@@ -1,5 +1,6 @@
 pydata-sphinx-theme
 pygithub
+python-magic
 pyyaml
 setuptools-scm
 sphinx-copybutton
