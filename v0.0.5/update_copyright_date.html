@@ -1,0 +1,927 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>update_copyright_date &#8212; murky 0.0.5 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=282f96c0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'update_copyright_date';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.2';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/prjemian/murky/main/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.0.5';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="murky_tool" href="murky_tool.html" />
+    <link rel="prev" title="create_release_notes" href="create_release_notes.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">murky 0.0.5 documentation</p>
+  
+</a></div>
+    
+      <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="create_release_notes.html">
+                        create_release_notes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        update_copyright_date
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="murky_tool.html">
+                        murky_tool
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="murky_create.html">
+                        murky_create.sh
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="create_release_notes.html">
+                        create_release_notes
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        update_copyright_date
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="murky_tool.html">
+                        murky_tool
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="murky_create.html">
+                        murky_create.sh
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">update_copyr...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="update-copyright-date">
+<span id="id1"></span><h1>update_copyright_date<a class="headerlink" href="#update-copyright-date" title="Link to this heading">#</a></h1>
+<p>Update the copyright date in all (project) text files.</p>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">#</a></h2>
+<p>A software project under active development and maintenance should edit its
+copyright notice annually to include (or extend) to the current year.  This
+task is often neglected as a project matures when the number of files to be
+updated increases.  Sometimes, the copyright notice in some files is missed.</p>
+</section>
+<section id="how-does-it-work">
+<h2>How does it work?<a class="headerlink" href="#how-does-it-work" title="Link to this heading">#</a></h2>
+<p>The code looks through all text files for lines with a copyright notice.
+The search is independent of upper or lower case.
+Consider these examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copyright (C) 1988-2020 Free Software Foundation, Inc.</span>
+<span class="n">Copyright</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="mi">2008</span><span class="o">-</span><span class="mi">2022</span> <span class="n">NeXus</span> <span class="n">International</span> <span class="n">Advisory</span> <span class="n">Committee</span> <span class="p">(</span><span class="n">NIAC</span><span class="p">)</span>
+<span class="n">Copyright</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="mi">2007</span> <span class="n">Free</span> <span class="n">Software</span> <span class="n">Foundation</span><span class="p">,</span> <span class="n">Inc</span><span class="o">.</span> <span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">fsf</span><span class="o">.</span><span class="n">org</span><span class="o">/&gt;</span>
+<span class="c1"># Copyright (c) 2006, 2008 Junio C Hamano</span>
+<span class="n">Copyright</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">2001</span><span class="p">,</span> <span class="mi">2002</span><span class="p">,</span> <span class="mi">2007</span><span class="p">,</span> <span class="mi">2008</span> <span class="n">Free</span> <span class="n">Software</span> <span class="n">Foundation</span><span class="p">,</span> <span class="n">Inc</span><span class="o">.</span>
+<span class="n">copyright</span> <span class="o">=</span> <span class="s2">&quot;(c) 2014-2024, Project Copyright Owner&quot;</span>
+<span class="n">Copyright</span> <span class="mi">2015</span> <span class="n">Jane</span> <span class="n">Doe</span>
+<span class="n">Copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="mi">1215</span><span class="p">,</span> <span class="mi">1871</span><span class="p">,</span> <span class="mi">1973</span><span class="p">,</span> <span class="mi">1975</span><span class="o">-</span><span class="mi">1991</span><span class="p">,</span> <span class="mi">2024</span> <span class="n">Some</span> <span class="n">Project</span> <span class="n">Owner</span>
+</pre></div>
+</div>
+<p>The code edits the list or range of years to include the current year.
+For example, when run in 2024, the <em>years</em> in these examples are:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>before</p></th>
+<th class="head"><p>after</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1988-2020</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1988-2024</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">2008-2022</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2008-2024</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">2007</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2007-2024</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">2006,</span> <span class="pre">2008</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2006,</span> <span class="pre">2008,</span> <span class="pre">2024</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">2000,</span> <span class="pre">2001,</span> <span class="pre">2002,</span> <span class="pre">2007,</span> <span class="pre">2008</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2000,</span> <span class="pre">2001,</span> <span class="pre">2002,</span> <span class="pre">2007,</span> <span class="pre">2008,</span> <span class="pre">2024</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">2000</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2000-2024</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">2014-2024</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2014-2024</span></code> (same, so file is not changed)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">2015</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2015-2024</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1215,</span> <span class="pre">1871,</span> <span class="pre">1914-1918,</span> <span class="pre">2008</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1215,</span> <span class="pre">1871,</span> <span class="pre">1914-1918,</span> <span class="pre">2008,</span> <span class="pre">2024</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Copyright notices share a common format.  <a class="footnote-reference brackets" href="#id3" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+<blockquote>
+<div><p>Generally, a copyright notice will read something like “Copyright 2015 Jane Doe.”</p>
+</div></blockquote>
+<p>The list or range of years is identified by matching common text before and
+after the text that describes the years.  It is common that the text <em>before</em>
+the years is the text representation of the copyright symbol (<code class="docutils literal notranslate"><span class="pre">&quot;(C)&quot;</span></code>).  The
+text <em>after</em> the years is the name of the copyright owner. The years are four
+digit numbers.</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
+<p>See <em>How to Make a Copyright Notice</em>:
+<a class="reference external" href="https://www.wikihow.com/Make-a-Copyright-Notice">https://www.wikihow.com/Make-a-Copyright-Notice</a></p>
+</aside>
+</aside>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h2>
+<p>Consider a file with this copyright notice:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="mi">1215</span><span class="p">,</span> <span class="mi">1871</span><span class="p">,</span> <span class="mi">1973</span><span class="p">,</span> <span class="mi">1975</span><span class="o">-</span><span class="mi">1991</span> <span class="n">Some</span> <span class="n">Project</span> <span class="n">Owner</span>
+</pre></div>
+</div>
+<p>In 2024, executing command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">update_copyright_date</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">s</span> <span class="s2">&quot;(c)&quot;</span> <span class="o">.</span> <span class="n">Owner</span>
+</pre></div>
+</div>
+<p>updates the years in the copyright notice to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="mi">1215</span><span class="p">,</span> <span class="mi">1871</span><span class="p">,</span> <span class="mi">1973</span><span class="p">,</span> <span class="mi">1975</span><span class="o">-</span><span class="mi">1991</span><span class="p">,</span> <span class="mi">2024</span> <span class="n">Some</span> <span class="n">Project</span> <span class="n">Owner</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a comparable bash shell command to <em>find</em> (but not replace) all matching lines:</p>
+<embed>
+<pre>
+$ <em>grep -iIR "(c)" | grep -i Owner</em>
+</pre>
+</embed></div>
+</section>
+<section id="command-positional-arguments">
+<h2>Command Positional Arguments<a class="headerlink" href="#command-positional-arguments" title="Link to this heading">#</a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">root_dir</span></code></dt><dd><p>Directory with the text files with copyrights to be updated.  A value of <code class="docutils literal notranslate"><span class="pre">.</span></code>
+means the current directory. The value can be a relative path (such as <code class="docutils literal notranslate"><span class="pre">.</span></code>
+or <code class="docutils literal notranslate"><span class="pre">../project</span></code>) or an absolute path (such as
+<code class="docutils literal notranslate"><span class="pre">/home/user/Documents/project/</span></code>).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">owner</span></code></dt><dd><p>The text to be matched that appears <em>after</em> the years.  Typically, the name of
+the copyright owner.</p>
+</dd>
+</dl>
+</section>
+<section id="command-options">
+<h2>Command Options<a class="headerlink" href="#command-options" title="Link to this heading">#</a></h2>
+<p>Command line options may be combined as long as any parameters required by an
+option appear in the correct order.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-v</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">--verbose</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-vv</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">-v</span> <span class="pre">-v</span></code> or <code class="docutils literal notranslate"><span class="pre">--verbose</span> <span class="pre">--verbose</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-dvvs</span> <span class="pre">&quot;(C)&quot;</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">--dry-run</span> <span class="pre">-vv</span> <span class="pre">--symbol</span> <span class="pre">&quot;(C)&quot;</span></code> (Note that the
+<code class="docutils literal notranslate"><span class="pre">s</span></code> option must come last since its required parameter must appear next.)</p></li>
+</ul>
+<section id="h-help">
+<h3><code class="docutils literal notranslate"><span class="pre">-h</span></code>, <code class="docutils literal notranslate"><span class="pre">--help</span></code><a class="headerlink" href="#h-help" title="Link to this heading">#</a></h3>
+<p>Help for how to use the command-line program:</p>
+<embed>
+<pre>
+$ <em>update_copyright_date <b>--help</b></em>
+usage: update_copyright_date [-h] [-s [SYMBOL]] [-y [YEAR]] [-i] [-d] [-v] [-q] [-V] root_dir owner
+
+Update the copyright date in all project text files.
+
+positional arguments:
+root_dir              project root directory
+owner                 Copyright owner text
+
+options:
+-h, --help            show this help message and exit
+-s [SYMBOL], --symbol [SYMBOL]
+                        Copyright symbol text. Default: '(C)'
+-y [YEAR], --year [YEAR]
+                        Final copyright year. Default: '2024'
+-d, --dry-run         Don't update any files. Default: False
+-v, --verbose         verbose output (repeat for increased verbosity)
+-q, --quiet           quiet output (show errors only), overrides -v option
+-V, --version         show program's version number and exit
+
+Finds text files in ``ROOT_DIR`` and all its subdirectories. In each file, looks
+for lines that contain the pattern of ``SYMBOL YEARS OWNER`` (case-independent)
+and updates ``YEARS`` to include the current year. YEARS is a list or range of
+4-digit numbers.
+$
+</pre>
+</embed><p>The <code class="docutils literal notranslate"><span class="pre">--help</span></code> option overrides any other options.</p>
+</section>
+<section id="s-symbol">
+<h3><code class="docutils literal notranslate"><span class="pre">-s</span></code>, <code class="docutils literal notranslate"><span class="pre">--symbol</span></code><a class="headerlink" href="#s-symbol" title="Link to this heading">#</a></h3>
+<p>The text to be matched that appears <em>before</em> the years.
+The default SYMBOL is <code class="docutils literal notranslate"><span class="pre">(C)</span></code>, common to many copyright notices.</p>
+<embed>
+<pre>
+$ <em>update_copyright_date . Owner</em>
+$
+</pre>
+</embed><p>which is equivalent to:</p>
+<embed>
+<pre>
+$ <em>update_copyright_date <b>--symbol "(C)"</b> . Owner</em>
+$
+</pre>
+</embed><p>Quotes are necessary around the <code class="docutils literal notranslate"><span class="pre">(C)</span></code> to indicate to the shell that SYMBOL is
+verbatim text and not a shell expansion.</p>
+<p>To match <code class="docutils literal notranslate"><span class="pre">Copyright</span> <span class="pre">2015</span> <span class="pre">Jane</span> <span class="pre">Doe</span></code>, use these definitions of SYMBOL and OWNER
+in the command line:</p>
+<embed>
+<pre>
+$ <em>update_copyright_date <b>--symbol Copyright</b> . <b>"Jane Doe"</b></em>
+$
+</pre>
+</embed><p>Quotes are necessary around the text <code class="docutils literal notranslate"><span class="pre">Jane</span> <span class="pre">Doe</span></code> to indicate to the shell that SYMBOL has
+both words.</p>
+</section>
+<section id="y-year">
+<h3><code class="docutils literal notranslate"><span class="pre">-y</span></code>, <code class="docutils literal notranslate"><span class="pre">--year</span></code><a class="headerlink" href="#y-year" title="Link to this heading">#</a></h3>
+<p>The new year to be added. The default is the current year.</p>
+<embed>
+<pre>
+$ <em>update_copyright_date -d <b>--year 2125</b> . Jemian</em>
+$
+</pre>
+</embed></section>
+<section id="d-dry-run">
+<h3><code class="docutils literal notranslate"><span class="pre">-d</span></code>, <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code><a class="headerlink" href="#d-dry-run" title="Link to this heading">#</a></h3>
+<p>A <em>dry run</em> shows what changes will be made without modifying any files.</p>
+<embed>
+<pre>
+$ <em>update_copyright_date <b>-dry-run</b> . Jemian</em>
+$
+</pre>
+</embed></section>
+<section id="v-verbose">
+<h3><code class="docutils literal notranslate"><span class="pre">-v</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose</span></code><a class="headerlink" href="#v-verbose" title="Link to this heading">#</a></h3>
+<p>Increase the level of progress messages.  Warnings and errors will always be
+reported. Use once to add information messages.  Use twice to add both
+information and debugging messages.  More than two will be the same two.</p>
+<embed>
+<pre>
+$ <em>update_copyright_date <b>-d</b> <b>-v</b> . Jemian</em>
+No changes necessary: .../murky/pyproject.toml
+No changes necessary: .../murky/murky/murky_tool.py
+No changes necessary: .../murky/murky/update_copyright_date.py
+No changes necessary: .../murky/murky/murky_create.sh
+No changes necessary: .../murky/murky/create_release_notes.py
+$
+</pre>
+</embed></section>
+<section id="q-quiet">
+<h3><code class="docutils literal notranslate"><span class="pre">-q</span></code>, <code class="docutils literal notranslate"><span class="pre">--quiet</span></code><a class="headerlink" href="#q-quiet" title="Link to this heading">#</a></h3>
+<p>Do not write anything to the console, except for warnings and error messages.
+This option overrides any <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> options.</p>
+<embed>
+<pre>
+$ <em>update_copyright_date <b>-d</b> <b>-v</b> . Jemian</em>
+No changes necessary: .../murky/pyproject.toml
+No changes necessary: .../murky/murky/murky_tool.py
+No changes necessary: .../murky/murky/update_copyright_date.py
+No changes necessary: .../murky/murky/murky_create.sh
+No changes necessary: .../murky/murky/create_release_notes.py
+$
+</pre>
+</embed></section>
+<section id="v-version">
+<h3><code class="docutils literal notranslate"><span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">--version</span></code><a class="headerlink" href="#v-version" title="Link to this heading">#</a></h3>
+<p>Software version of this application. The <code class="docutils literal notranslate"><span class="pre">--version</span></code> option overrides any
+other options except <code class="docutils literal notranslate"><span class="pre">--help</span></code>.</p>
+<embed>
+<pre>
+$ <em>update_copyright_date <b>--version</b></em>
+$
+</pre>
+</embed></section>
+</section>
+<hr class="docutils" />
+<section id="module-murky.update_copyright_date">
+<span id="source-code-documentation"></span><h2>Source Code Documentation<a class="headerlink" href="#module-murky.update_copyright_date" title="Link to this heading">#</a></h2>
+<p>Update the copyright date in all project text files.</p>
+<p>Finds text files in <code class="docutils literal notranslate"><span class="pre">ROOT_DIR</span></code> and all its subdirectories. In each file, looks
+for lines that contain the pattern of <code class="docutils literal notranslate"><span class="pre">SYMBOL</span> <span class="pre">YEARS</span> <span class="pre">OWNER</span></code> (case-independent)
+and updates <code class="docutils literal notranslate"><span class="pre">YEARS</span></code> to include the current year. YEARS is a list or range of
+4-digit numbers.</p>
+<p>Command Line Application</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#murky.update_copyright_date.main" title="murky.update_copyright_date.main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">main</span></code></a>()</p></td>
+<td><p>Entry point for command-line <code class="docutils literal notranslate"><span class="pre">update_copyright_date</span></code> application.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.update_copyright_date.command_args" title="murky.update_copyright_date.command_args"><code class="xref py py-obj docutils literal notranslate"><span class="pre">command_args</span></code></a>()</p></td>
+<td><p>Get the command-line arguments, handle syntax errors.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Public API</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#murky.update_copyright_date.find_source_files" title="murky.update_copyright_date.find_source_files"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_source_files</span></code></a>(path)</p></td>
+<td><p>Return a list of all files in path and all of its subdirectories.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.update_copyright_date.update" title="murky.update_copyright_date.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>(filename, owner[, symbol, dry_run, year])</p></td>
+<td><p>Update the copyright year in filename.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Internal Functions</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#murky.update_copyright_date.find_years_indices" title="murky.update_copyright_date.find_years_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_years_indices</span></code></a>(line, symbol, owner)</p></td>
+<td><p>Return the start and end indices of the copyright years in the text.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.update_copyright_date.is_recognized_text_file" title="murky.update_copyright_date.is_recognized_text_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_recognized_text_file</span></code></a>(path)</p></td>
+<td><p>Is the file on this path acceptable as text?</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#murky.update_copyright_date.qualify_inputs" title="murky.update_copyright_date.qualify_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qualify_inputs</span></code></a>(root_path)</p></td>
+<td><p>Raise error if this program cannot continue, based on the inputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.update_copyright_date.revise_copyright_line" title="murky.update_copyright_date.revise_copyright_line"><code class="xref py py-obj docutils literal notranslate"><span class="pre">revise_copyright_line</span></code></a>(line, symbol, owner, year)</p></td>
+<td><p>Update the copyright year on this line.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#murky.update_copyright_date.setup_logging" title="murky.update_copyright_date.setup_logging"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup_logging</span></code></a>(verbosity)</p></td>
+<td><p>Set up the logging subsystem.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.update_copyright_date.sift_file_list" title="murky.update_copyright_date.sift_file_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sift_file_list</span></code></a>(file_list)</p></td>
+<td><p>From a list of all files, return a list of the files recognized as text.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#murky.update_copyright_date.UnexpectedSeparatorError" title="murky.update_copyright_date.UnexpectedSeparatorError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnexpectedSeparatorError</span></code></a></p></td>
+<td><p>Separator between years in copyright notice was not expected.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.update_copyright_date.YearsNotFound" title="murky.update_copyright_date.YearsNotFound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">YearsNotFound</span></code></a></p></td>
+<td><p>Did not find list or range of years in matching copyright line.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py exception">
+<dt class="sig sig-object py" id="murky.update_copyright_date.UnexpectedSeparatorError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">UnexpectedSeparatorError</span></span><a class="headerlink" href="#murky.update_copyright_date.UnexpectedSeparatorError" title="Link to this definition">#</a></dt>
+<dd><p>Separator between years in copyright notice was not expected.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="murky.update_copyright_date.YearsNotFound">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">YearsNotFound</span></span><a class="headerlink" href="#murky.update_copyright_date.YearsNotFound" title="Link to this definition">#</a></dt>
+<dd><p>Did not find list or range of years in matching copyright line.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.command_args">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">command_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.command_args" title="Link to this definition">#</a></dt>
+<dd><p>Get the command-line arguments, handle syntax errors.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.find_source_files">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">find_source_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.find_source_files" title="Link to this definition">#</a></dt>
+<dd><p>Return a list of all files in path and all of its subdirectories.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.find_years_indices">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">find_years_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owner</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.find_years_indices" title="Link to this definition">#</a></dt>
+<dd><p>Return the start and end indices of the copyright years in the text.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.is_recognized_text_file">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">is_recognized_text_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.is_recognized_text_file" title="Link to this definition">#</a></dt>
+<dd><p>Is the file on this path acceptable as text?</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.main">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.main" title="Link to this definition">#</a></dt>
+<dd><p>Entry point for command-line <code class="docutils literal notranslate"><span class="pre">update_copyright_date</span></code> application.</p>
+<ul class="simple">
+<li><p>source directory named as command line argument</p></li>
+<li><p>target directory is specified (or defaults to present working directory)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.qualify_inputs">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">qualify_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.qualify_inputs" title="Link to this definition">#</a></dt>
+<dd><p>Raise error if this program cannot continue, based on the inputs.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.revise_copyright_line">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">revise_copyright_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owner</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.revise_copyright_line" title="Link to this definition">#</a></dt>
+<dd><p>Update the copyright year on this line.</p>
+<p>PARAMETERS</p>
+<dl>
+<dt>line<span class="classifier"><em>str</em></span></dt><dd><p>Line of text that contains a copyright notice.</p>
+</dd>
+<dt>symbol<span class="classifier"><em>str</em></span></dt><dd><p>The text to be found <em>before</em> the text with the years.</p>
+</dd>
+<dt>owner<span class="classifier"><em>str</em></span></dt><dd><p>The text to be found <em>after</em> the text with the years.</p>
+</dd>
+<dt>year<span class="classifier"><em>str</em></span></dt><dd><p>Line of text that contains a copyright notice.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.setup_logging">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">setup_logging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbosity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.setup_logging" title="Link to this definition">#</a></dt>
+<dd><p>Set up the logging subsystem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">See<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://xahteiwi.eu/resources/hints-and-kinks/python-cli-logging-options/">https://xahteiwi.eu/resources/hints-and-kinks/python-cli-logging-options/</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.sift_file_list">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">sift_file_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.sift_file_list" title="Link to this definition">#</a></dt>
+<dd><p>From a list of all files, return a list of the files recognized as text.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.update">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owner</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'(C)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2024'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.update" title="Link to this definition">#</a></dt>
+<dd><p>Update the copyright year in filename.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="create_release_notes.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">create_release_notes</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="murky_tool.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">murky_tool</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-it-work">How does it work?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-positional-arguments">Command Positional Arguments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command-options">Command Options</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#h-help"><code class="docutils literal notranslate"><span class="pre">-h</span></code>, <code class="docutils literal notranslate"><span class="pre">--help</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#s-symbol"><code class="docutils literal notranslate"><span class="pre">-s</span></code>, <code class="docutils literal notranslate"><span class="pre">--symbol</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#y-year"><code class="docutils literal notranslate"><span class="pre">-y</span></code>, <code class="docutils literal notranslate"><span class="pre">--year</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-dry-run"><code class="docutils literal notranslate"><span class="pre">-d</span></code>, <code class="docutils literal notranslate"><span class="pre">--dry-run</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#v-verbose"><code class="docutils literal notranslate"><span class="pre">-v</span></code>, <code class="docutils literal notranslate"><span class="pre">--verbose</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-quiet"><code class="docutils literal notranslate"><span class="pre">-q</span></code>, <code class="docutils literal notranslate"><span class="pre">--quiet</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#v-version"><code class="docutils literal notranslate"><span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">--version</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-murky.update_copyright_date">Source Code Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.UnexpectedSeparatorError"><code class="docutils literal notranslate"><span class="pre">UnexpectedSeparatorError</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.YearsNotFound"><code class="docutils literal notranslate"><span class="pre">YearsNotFound</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.command_args"><code class="docutils literal notranslate"><span class="pre">command_args()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.find_source_files"><code class="docutils literal notranslate"><span class="pre">find_source_files()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.find_years_indices"><code class="docutils literal notranslate"><span class="pre">find_years_indices()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.is_recognized_text_file"><code class="docutils literal notranslate"><span class="pre">is_recognized_text_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.qualify_inputs"><code class="docutils literal notranslate"><span class="pre">qualify_inputs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.revise_copyright_line"><code class="docutils literal notranslate"><span class="pre">revise_copyright_line()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.setup_logging"><code class="docutils literal notranslate"><span class="pre">setup_logging()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.sift_file_list"><code class="docutils literal notranslate"><span class="pre">sift_file_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.update"><code class="docutils literal notranslate"><span class="pre">update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="_sources/update_copyright_date.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2014-2024, Pete R. Jemian.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.2.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
