@@ -162,6 +162,7 @@ def update(
     if not filename.exists():
         return
 
+    logger.debug("Examining: %s", filename)
     # fmt: off
     with open(filename) as fp:
         text_file_lines = fp.readlines()
@@ -188,14 +189,18 @@ def update(
             continue
         if text != revision:
             changes[number] = revision
-        logger.debug("(%s,%d):\n---: %r\n+++: %r", filename, number, text, revision)
+        if dry_run:
+            log_func = logger.info
+        else:
+            log_func = logger.debug
+        log_func("(%s,%d):\n---: %r\n+++: %r", filename, number, text, revision)
 
     if len(changes) == 0:
         logger.debug("No changes necessary: %s", filename)
         return
 
     if dry_run:
-        logger.debug("Dry run: original file not changed: %s", filename)
+        logger.info("Dry run: original file not changed: %s", filename)
         return
 
     logger.info("Update with %d line(s) changed: %s", len(changes), filename)
@@ -357,7 +362,7 @@ def main():
             cli.owner,
             symbol=cli.symbol,
             dry_run=cli.dry_run,
-            year=cli.year,
+            year=cli.year or THIS_YEAR,
         )
 
 
