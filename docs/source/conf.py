@@ -59,5 +59,6 @@ html_theme_options = {
         "json_url": "https://raw.githubusercontent.com/prjemian/murky/main/switcher.json",
         "version_match": version_match,
     },
-   "navbar_start": ["navbar-logo", "version-switcher"],
+    "navbar_start": ["navbar-logo", "version-switcher"],
+    "navigation_with_keys": True,
 }
