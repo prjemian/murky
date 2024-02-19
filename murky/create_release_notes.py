@@ -9,7 +9,6 @@ Run from the root directory of a package.
 
     ~main
     ~findGitConfigFile
-    ~_parse_git_url
     ~getRepositoryInfo
     ~get_release_info
     ~parse_command_line
