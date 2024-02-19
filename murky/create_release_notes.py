@@ -31,6 +31,7 @@ import configparser
 import datetime
 import logging
 import pathlib
+import urllib
 
 import github
 
@@ -87,10 +88,13 @@ def getRepositoryInfo(path=None):
         if not section.startswith("remote"):
             continue
         url = parser[section].get("url")
-        if url is None:
-            raise ValueError(f"No URL in section {section!r} of {path!r}")
-        if "github.com" in url:
-            return _parse_git_url(url)
+        info = urllib.parse.urlparse(url)  # OK if url is None
+        if "github.com" in info.path:  # git@github.com:org/repo.git
+            org, repo = info.path.rstrip(".git").split(":")[-1].split("/")
+            return org, repo
+        elif "github.com" in info.netloc:  # https://github.com/org/repo
+            org, repo = info.path.lstrip("/").rstrip(".git").split("/")
+            return org, repo
     
     raise ValueError(f"No GitHub info found: {path!r}")
 
