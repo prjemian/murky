@@ -89,10 +89,10 @@ def getRepositoryInfo(path=None):
             continue
         url = parser[section].get("url")
         info = urllib.parse.urlparse(url)  # OK if url is None
-        if "github.com" in info.path:  # git@github.com:org/repo.git
+        if info.path.startswith("github.com:"):  # git@github.com:org/repo.git
             org, repo = info.path.rstrip(".git").split(":")[-1].split("/")
             return org, repo
-        elif "github.com" in info.netloc:  # https://github.com/org/repo
+        elif info.netloc == "github.com":  # https://github.com/org/repo
             org, repo = info.path.lstrip("/").rstrip(".git").split("/")
             return org, repo
     
