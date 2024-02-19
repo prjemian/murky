@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>update_copyright_date &#8212; murky 0.0.5.dev64+g23a305a documentation</title>
+    <title>update_copyright_date &#8212; murky 0.0.5.dev65+gaa143e2 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="_static/documentation_options.js?v=3a3926f2"></script>
+    <script src="_static/documentation_options.js?v=22b31fed"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -45,7 +45,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.2';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/prjemian/murky/main/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.0.5.dev64+g23a305a';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.0.5.dev65+gaa143e2';
         DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
         </script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -124,7 +124,7 @@
   
   
   
-    <p class="title logo__title">murky 0.0.5.dev64+g23a305a documentation</p>
+    <p class="title logo__title">murky 0.0.5.dev65+gaa143e2 documentation</p>
   
 </a></div>
     
@@ -628,8 +628,156 @@ $
 </embed></section>
 </section>
 <hr class="docutils" />
-<section id="source-code-documentation">
-<h2>Source Code Documentation<a class="headerlink" href="#source-code-documentation" title="Link to this heading">#</a></h2>
+<section id="module-murky.update_copyright_date">
+<span id="source-code-documentation"></span><h2>Source Code Documentation<a class="headerlink" href="#module-murky.update_copyright_date" title="Link to this heading">#</a></h2>
+<p>Update the copyright date in all project text files.</p>
+<p>Finds text files in <code class="docutils literal notranslate"><span class="pre">ROOT_DIR</span></code> and all its subdirectories. In each file, looks
+for lines that contain the pattern of <code class="docutils literal notranslate"><span class="pre">SYMBOL</span> <span class="pre">YEARS</span> <span class="pre">OWNER</span></code> (case-independent)
+and updates <code class="docutils literal notranslate"><span class="pre">YEARS</span></code> to include the current year. YEARS is a list or range of
+4-digit numbers.</p>
+<p>Command Line Application</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#murky.update_copyright_date.main" title="murky.update_copyright_date.main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">main</span></code></a>()</p></td>
+<td><p>Entry point for command-line <code class="docutils literal notranslate"><span class="pre">update_copyright_date</span></code> application.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.update_copyright_date.command_args" title="murky.update_copyright_date.command_args"><code class="xref py py-obj docutils literal notranslate"><span class="pre">command_args</span></code></a>()</p></td>
+<td><p>Get the command-line arguments, handle syntax errors.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Public API</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#murky.update_copyright_date.find_source_files" title="murky.update_copyright_date.find_source_files"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_source_files</span></code></a>(path)</p></td>
+<td><p>Return a list of all files in path and all of its subdirectories.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.update_copyright_date.update" title="murky.update_copyright_date.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>(filename, owner[, symbol, dry_run, year])</p></td>
+<td><p>Update the copyright year in filename.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Internal Functions</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#murky.update_copyright_date.find_years_indices" title="murky.update_copyright_date.find_years_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_years_indices</span></code></a>(line, symbol, owner)</p></td>
+<td><p>Return the start and end indices of the copyright years in the text.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.update_copyright_date.is_recognized_text_file" title="murky.update_copyright_date.is_recognized_text_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_recognized_text_file</span></code></a>(path)</p></td>
+<td><p>Is the file on this path acceptable as text?</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#murky.update_copyright_date.qualify_inputs" title="murky.update_copyright_date.qualify_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qualify_inputs</span></code></a>(root_path)</p></td>
+<td><p>Raise error if this program cannot continue, based on the inputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.update_copyright_date.revise_copyright_line" title="murky.update_copyright_date.revise_copyright_line"><code class="xref py py-obj docutils literal notranslate"><span class="pre">revise_copyright_line</span></code></a>(line, symbol, owner, year)</p></td>
+<td><p>Update the copyright year on this line.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#murky.update_copyright_date.setup_logging" title="murky.update_copyright_date.setup_logging"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup_logging</span></code></a>(verbosity)</p></td>
+<td><p>Set up the logging subsystem.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.update_copyright_date.sift_file_list" title="murky.update_copyright_date.sift_file_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sift_file_list</span></code></a>(file_list)</p></td>
+<td><p>From a list of all files, return a list of the files recognized as text.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#murky.update_copyright_date.UnexpectedSeparatorError" title="murky.update_copyright_date.UnexpectedSeparatorError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnexpectedSeparatorError</span></code></a></p></td>
+<td><p>Separator between years in copyright notice was not expected.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.update_copyright_date.YearsNotFound" title="murky.update_copyright_date.YearsNotFound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">YearsNotFound</span></code></a></p></td>
+<td><p>Did not find list or range of years in matching copyright line.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py exception">
+<dt class="sig sig-object py" id="murky.update_copyright_date.UnexpectedSeparatorError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">UnexpectedSeparatorError</span></span><a class="headerlink" href="#murky.update_copyright_date.UnexpectedSeparatorError" title="Link to this definition">#</a></dt>
+<dd><p>Separator between years in copyright notice was not expected.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="murky.update_copyright_date.YearsNotFound">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">YearsNotFound</span></span><a class="headerlink" href="#murky.update_copyright_date.YearsNotFound" title="Link to this definition">#</a></dt>
+<dd><p>Did not find list or range of years in matching copyright line.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.command_args">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">command_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.command_args" title="Link to this definition">#</a></dt>
+<dd><p>Get the command-line arguments, handle syntax errors.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.find_source_files">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">find_source_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.find_source_files" title="Link to this definition">#</a></dt>
+<dd><p>Return a list of all files in path and all of its subdirectories.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.find_years_indices">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">find_years_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owner</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.find_years_indices" title="Link to this definition">#</a></dt>
+<dd><p>Return the start and end indices of the copyright years in the text.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.is_recognized_text_file">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">is_recognized_text_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.is_recognized_text_file" title="Link to this definition">#</a></dt>
+<dd><p>Is the file on this path acceptable as text?</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.main">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.main" title="Link to this definition">#</a></dt>
+<dd><p>Entry point for command-line <code class="docutils literal notranslate"><span class="pre">update_copyright_date</span></code> application.</p>
+<ul class="simple">
+<li><p>source directory named as command line argument</p></li>
+<li><p>target directory is specified (or defaults to present working directory)</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.qualify_inputs">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">qualify_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.qualify_inputs" title="Link to this definition">#</a></dt>
+<dd><p>Raise error if this program cannot continue, based on the inputs.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.revise_copyright_line">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">revise_copyright_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owner</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.revise_copyright_line" title="Link to this definition">#</a></dt>
+<dd><p>Update the copyright year on this line.</p>
+<p>PARAMETERS</p>
+<dl>
+<dt>line<span class="classifier"><em>str</em></span></dt><dd><p>Line of text that contains a copyright notice.</p>
+</dd>
+<dt>symbol<span class="classifier"><em>str</em></span></dt><dd><p>The text to be found <em>before</em> the text with the years.</p>
+</dd>
+<dt>owner<span class="classifier"><em>str</em></span></dt><dd><p>The text to be found <em>after</em> the text with the years.</p>
+</dd>
+<dt>year<span class="classifier"><em>str</em></span></dt><dd><p>Line of text that contains a copyright notice.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.setup_logging">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">setup_logging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbosity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.setup_logging" title="Link to this definition">#</a></dt>
+<dd><p>Set up the logging subsystem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">See<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://xahteiwi.eu/resources/hints-and-kinks/python-cli-logging-options/">https://xahteiwi.eu/resources/hints-and-kinks/python-cli-logging-options/</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.sift_file_list">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">sift_file_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.sift_file_list" title="Link to this definition">#</a></dt>
+<dd><p>From a list of all files, return a list of the files recognized as text.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="murky.update_copyright_date.update">
+<span class="sig-prename descclassname"><span class="pre">murky.update_copyright_date.</span></span><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owner</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'(C)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">year</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2024'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.update_copyright_date.update" title="Link to this definition">#</a></dt>
+<dd><p>Update the copyright year in filename.</p>
+</dd></dl>
+
 </section>
 </section>
 
@@ -693,7 +841,21 @@ $
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#v-version"><code class="docutils literal notranslate"><span class="pre">-V</span></code>, <code class="docutils literal notranslate"><span class="pre">--version</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-code-documentation">Source Code Documentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-murky.update_copyright_date">Source Code Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.UnexpectedSeparatorError"><code class="docutils literal notranslate"><span class="pre">UnexpectedSeparatorError</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.YearsNotFound"><code class="docutils literal notranslate"><span class="pre">YearsNotFound</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.command_args"><code class="docutils literal notranslate"><span class="pre">command_args()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.find_source_files"><code class="docutils literal notranslate"><span class="pre">find_source_files()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.find_years_indices"><code class="docutils literal notranslate"><span class="pre">find_years_indices()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.is_recognized_text_file"><code class="docutils literal notranslate"><span class="pre">is_recognized_text_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.qualify_inputs"><code class="docutils literal notranslate"><span class="pre">qualify_inputs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.revise_copyright_line"><code class="docutils literal notranslate"><span class="pre">revise_copyright_line()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.setup_logging"><code class="docutils literal notranslate"><span class="pre">setup_logging()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.sift_file_list"><code class="docutils literal notranslate"><span class="pre">sift_file_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#murky.update_copyright_date.update"><code class="docutils literal notranslate"><span class="pre">update()</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
