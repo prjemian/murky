@@ -3,15 +3,17 @@ Test the update_copyright_date module.
 """
 
 import pathlib
-import pytest
 import sys
 import tempfile
+
+import pytest
+
+from .. import update_copyright_date as ucd
 
 # import datetime
 # import shutil
 # import zipfile
 
-from .. import update_copyright_date as ucd
 
 BASE_YEAR = "1915"
 OTHER_YEAR = "2001"
