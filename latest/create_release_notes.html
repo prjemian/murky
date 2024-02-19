@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>create_release_notes &#8212; murky 0.0.5.dev59+g3d81af4 documentation</title>
+    <title>create_release_notes &#8212; murky 0.0.5.dev63+g3a62615 documentation</title>
   
   
   
@@ -36,7 +36,7 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
   <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script src="_static/documentation_options.js?v=480d6cce"></script>
+    <script src="_static/documentation_options.js?v=272996ee"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -45,7 +45,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.2';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://raw.githubusercontent.com/prjemian/murky/main/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.0.5.dev59+g3d81af4';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.0.5.dev63+g3a62615';
         DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
         </script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -124,7 +124,7 @@
   
   
   
-    <p class="title logo__title">murky 0.0.5.dev59+g3d81af4 documentation</p>
+    <p class="title logo__title">murky 0.0.5.dev63+g3a62615 documentation</p>
   
 </a></div>
     
@@ -409,43 +409,36 @@ document.write(`
 <tr class="row-odd"><td><p><a class="reference internal" href="#murky.create_release_notes.main" title="murky.create_release_notes.main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">main</span></code></a>([base, head, milestone, token, debug])</p></td>
 <td><p>Command-line application program.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#murky.create_release_notes.findGitConfigFile" title="murky.create_release_notes.findGitConfigFile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">findGitConfigFile</span></code></a>()</p></td>
-<td><p>Return full path to .git/config file.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.create_release_notes.findGitConfigFile" title="murky.create_release_notes.findGitConfigFile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">findGitConfigFile</span></code></a>([path])</p></td>
+<td><p>Return full path to <code class="docutils literal notranslate"><span class="pre">ROOT/.git/config</span></code> file.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">_parse_git_url</span></code>(url)</p></td>
-<td><p>Return (organization, repository) tuple from url line of .git/config file.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#murky.create_release_notes.getRepositoryInfo" title="murky.create_release_notes.getRepositoryInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getRepositoryInfo</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#murky.create_release_notes.getRepositoryInfo" title="murky.create_release_notes.getRepositoryInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getRepositoryInfo</span></code></a>([path])</p></td>
 <td><p>Return (organization, repository) tuple from .git/config file.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#murky.create_release_notes.get_release_info" title="murky.create_release_notes.get_release_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_release_info</span></code></a>(token, base_tag_name, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.create_release_notes.get_release_info" title="murky.create_release_notes.get_release_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_release_info</span></code></a>(token, base_tag_name, ...)</p></td>
 <td><p>Mine the Github API for information about this release.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#murky.create_release_notes.parse_command_line" title="murky.create_release_notes.parse_command_line"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_command_line</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#murky.create_release_notes.parse_command_line" title="murky.create_release_notes.parse_command_line"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_command_line</span></code></a>()</p></td>
 <td><p>Command line argument parser.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#murky.create_release_notes.report" title="murky.create_release_notes.report"><code class="xref py py-obj docutils literal notranslate"><span class="pre">report</span></code></a>(title, repo, milestone, tags, pulls, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#murky.create_release_notes.report" title="murky.create_release_notes.report"><code class="xref py py-obj docutils literal notranslate"><span class="pre">report</span></code></a>(title, repo, milestone, tags, pulls, ...)</p></td>
 <td><p>Print results to stdout.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py function">
 <dt class="sig sig-object py" id="murky.create_release_notes.findGitConfigFile">
-<span class="sig-prename descclassname"><span class="pre">murky.create_release_notes.</span></span><span class="sig-name descname"><span class="pre">findGitConfigFile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#murky.create_release_notes.findGitConfigFile" title="Link to this definition">#</a></dt>
-<dd><p>Return full path to .git/config file.</p>
-<p>Must be in current working directory or some parent directory.</p>
+<span class="sig-prename descclassname"><span class="pre">murky.create_release_notes.</span></span><span class="sig-name descname"><span class="pre">findGitConfigFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.create_release_notes.findGitConfigFile" title="Link to this definition">#</a></dt>
+<dd><p>Return full path to <code class="docutils literal notranslate"><span class="pre">ROOT/.git/config</span></code> file.</p>
+<p>Supplied ‘path’ must be in the ROOT directory or a subdirectory.</p>
 <p>This is a simplistic search that could be improved by using
 an open source package.</p>
-<p>Needs testing for when things are wrong.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="murky.create_release_notes.getRepositoryInfo">
-<span class="sig-prename descclassname"><span class="pre">murky.create_release_notes.</span></span><span class="sig-name descname"><span class="pre">getRepositoryInfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#murky.create_release_notes.getRepositoryInfo" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">murky.create_release_notes.</span></span><span class="sig-name descname"><span class="pre">getRepositoryInfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#murky.create_release_notes.getRepositoryInfo" title="Link to this definition">#</a></dt>
 <dd><p>Return (organization, repository) tuple from .git/config file.</p>
-<p>This is a simplistic search that could be improved by using
-an open source package.</p>
-<p>Needs testing for when things are wrong.</p>
 </dd></dl>
 
 <dl class="py function">
