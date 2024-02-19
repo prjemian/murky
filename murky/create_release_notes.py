@@ -27,6 +27,7 @@ Run from the root directory of a package.
 # of the release.
 
 import argparse
+import configparser
 import datetime
 import logging
 import pathlib
@@ -75,22 +76,23 @@ def _parse_git_url(url):
 def getRepositoryInfo(path=None):
     """
     Return (organization, repository) tuple from .git/config file.
-
-    This is a simplistic search that could be improved by using
-    an open source package.
     """
-    config_file = findGitConfigFile(pathlib.Path(path or pathlib.Path.cwd()))
+    path = pathlib.Path(path or pathlib.Path.cwd())
 
-    with open(config_file, "r") as f:
-        for line in f.readlines():
-            line = line.strip()
-            if line.startswith("url"):
-                url = line.split("=")[-1].strip()
-                if url.find("github.com") < 0:
-                    msg = "Not a GitHub repo: " + url
-                    logger.error(msg)
-                    raise ValueError(msg)
-                return _parse_git_url(url)
+    parser = configparser.ConfigParser()
+    parser.read(findGitConfigFile(path))
+
+    # Look for a github remote (pick the first one found, if multiple).
+    for section in parser.sections():
+        if not section.startswith("remote"):
+            continue
+        url = parser[section].get("url")
+        if url is None:
+            raise ValueError(f"No URL in section {section!r} of {path!r}")
+        if "github.com" in url:
+            return _parse_git_url(url)
+    
+    raise ValueError(f"No GitHub info found: {path!r}")
 
 
 def get_release_info(token, base_tag_name, head_branch_name, milestone_name):
