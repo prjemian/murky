@@ -1,8 +1,39 @@
-"""Test the update_copyright_date module."""
+"""
+Test the update_copyright_date module.
+"""
+
+import pathlib
+import sys
+import tempfile
 
 import pytest
 
 from .. import update_copyright_date as ucd
+
+# import datetime
+# import shutil
+# import zipfile
+
+
+BASE_YEAR = "1915"
+OTHER_YEAR = "2001"
+
+
+def make_notice(years=None, owner=None, symbol=None):
+    years = years or {ucd.LAST_YEAR}
+    owner = owner or "Unit Test Example"
+    symbol = symbol or "Copyright (C)"
+    return f"{symbol} {years} {owner}"
+
+
+def reset_argv():
+    sys.argv = [__file__]
+
+
+@pytest.fixture(scope="function")
+def tmpdir():
+    temporary_directory = tempfile.mkdtemp()
+    yield pathlib.Path(temporary_directory)
 
 
 @pytest.mark.parametrize(
@@ -115,3 +146,44 @@ def test_find_years_indices(line, symbol, owner, expected, year_string, final):
 
     result = ucd.revise_copyright_line(line, symbol, owner, ucd.THIS_YEAR)
     assert result == final
+
+
+def test_basic(tmpdir):
+    assert tmpdir.exists()
+
+    # make a text file with no copyright notice
+    tfile = tmpdir / "example.txt"
+    assert not tfile.exists()
+
+    with open(tfile, "w", encoding="utf8") as fp:
+        fp.write(f"{__doc__}\n")
+    assert tfile.exists()
+
+    # Add copyright notice
+    notice = make_notice(f"{BASE_YEAR}, {OTHER_YEAR}-{ucd.LAST_YEAR}")
+    with open(tfile, "a", encoding="utf8") as fp:
+        fp.write(notice + "\n")
+    assert tfile.exists()
+
+    reset_argv()
+    assert len(sys.argv) == 1
+
+    sys.argv += ["--dry-run", str(tmpdir), "Example"]
+    assert len(sys.argv) == 4
+    ucd.main()
+    with open(tfile) as fp:
+        line = fp.readlines()[-1].strip()
+    assert line == notice  # not updated
+
+    revised = make_notice(f"{BASE_YEAR}, {OTHER_YEAR}-{ucd.THIS_YEAR}")
+    reset_argv()
+    sys.argv += [str(tmpdir), "Example"]
+    ucd.main()
+    with open(tfile) as fp:
+        line = fp.readlines()[-1].strip()
+    assert line != notice  # updated
+    assert line == revised  # updated
+
+# zfile = tmpdir / "example.zip"
+# https://docs.python.org/3/library/zipfile.html#zipfile-objects
+# pcache = tmpfile / "__pycache__"

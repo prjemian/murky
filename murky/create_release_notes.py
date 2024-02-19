@@ -27,74 +27,63 @@ Run from the root directory of a package.
 # of the release.
 
 import argparse
+import configparser
 import datetime
-import github
 import logging
-import os
+import pathlib
+import urllib
 
+import github
 
 logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger("create_release_notes")
 
 
-def findGitConfigFile():
+def findGitConfigFile(path=None):
     """
-    Return full path to .git/config file.
+    Return full path to ``ROOT/.git/config`` file.
 
-    Must be in current working directory or some parent directory.
+    Supplied 'path' must be in the ROOT directory or a subdirectory.
 
     This is a simplistic search that could be improved by using
     an open source package.
-
-    Needs testing for when things are wrong.
     """
-    path = os.getcwd()
-    for _i in range(99):
-        config_file = os.path.join(path, ".git", "config")
-        if os.path.exists(config_file):
-            return config_file  # found it!
+    path = pathlib.Path(path or pathlib.Path.cwd())
+    original_path = path
+    while path != path.parent:
+        config_path = path / ".git" / "config"
+        if config_path.exists():
+            return config_path
+        path = path.parent
 
-        # next, look in the parent directory
-        path = os.path.abspath(os.path.join(path, ".."))
-
-    msg = "Could not find .git/config file in any parent directory."
-    logger.error(msg)
-    raise ValueError(msg)
-
-
-def _parse_git_url(url):
-    """
-    Return (organization, repository) tuple from url line of .git/config file.
-
-    Called from 'getRepositoryInfo()'.
-    """
-    if url.startswith("git@"):  # deal with git@github.com:org/repo.git
-        url = url.split(":")[1]
-    org, repo = url.rstrip(".git").split("/")[-2:]
-    return org, repo
+    raise FileNotFoundError(
+        f"Git config file '.git/config' not found in"
+        f" {original_path!r} or any its parents."
+    )
 
 
-def getRepositoryInfo():
+def getRepositoryInfo(path=None):
     """
     Return (organization, repository) tuple from .git/config file.
-
-    This is a simplistic search that could be improved by using
-    an open source package.
-
-    Needs testing for when things are wrong.
     """
-    config_file = findGitConfigFile()
+    path = pathlib.Path(path or pathlib.Path.cwd())
 
-    with open(config_file, "r") as f:
-        for line in f.readlines():
-            line = line.strip()
-            if line.startswith("url"):
-                url = line.split("=")[-1].strip()
-                if url.find("github.com") < 0:
-                    msg = "Not a GitHub repo: " + url
-                    logger.error(msg)
-                    raise ValueError(msg)
-                return _parse_git_url(url)
+    parser = configparser.ConfigParser()
+    parser.read(findGitConfigFile(path))
+
+    # Look for a github remote (pick the first one found, if multiple).
+    for section in parser.sections():
+        if not section.startswith("remote"):
+            continue
+        info = urllib.parse.urlparse(parser[section].get("url"))  # OK if url is None
+        if info.path.startswith("git@github.com:"):  # git@github.com:org/repo.git
+            org, repo = info.path.rstrip(".git").split(":")[-1].split("/")
+            return org, repo
+        elif info.netloc == "github.com":  # https://github.com/org/repo
+            org, repo = info.path.lstrip("/").rstrip(".git").split("/")
+            return org, repo
+    
+    raise ValueError(f"No GitHub info found: {path!r}")
 
 
 def get_release_info(token, base_tag_name, head_branch_name, milestone_name):
