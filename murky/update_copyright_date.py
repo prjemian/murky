@@ -20,12 +20,14 @@ Command Line Application
 Public API
 
 .. autosummary::
+
     ~find_source_files
     ~update
 
 Internal Functions
 
 .. autosummary::
+
     ~find_years_indices
     ~is_recognized_text_file
     ~qualify_inputs
