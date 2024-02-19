@@ -56,7 +56,7 @@ html_baseurl = ""
 html_theme_options = {
     # https://pydata-sphinx-theme.readthedocs.io/en/latest/user_guide/version-dropdown.html
     "switcher": {
-        "json_url": "https://raw.githubusercontent.com/prjemian/murky/main/switcher.json",
+        "json_url": "https://raw.githubusercontent.com/prjemian/murky/main/docs/switcher.json",
         "version_match": version_match,
     },
     "navbar_start": ["navbar-logo", "version-switcher"],
