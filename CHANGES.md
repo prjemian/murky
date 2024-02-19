@@ -13,13 +13,13 @@
 
 2024-02-18
 
-- Add update_copyright_date
-- add python-magic packaging requirement
-- CI tests with Python versions: 3.8 - 3.12
+* Add update_copyright_date
+* add python-magic packaging requirement
+* CI tests with Python versions: 3.8 - 3.12
 
 ### 0.0.4
 
-- CI tests with Python versions: 3.7 - 3.11
+* CI tests with Python versions: 3.7 - 3.11
 
 ### 0.0.3
 
@@ -29,11 +29,11 @@
 
 2022-08-08
 
-- CI tests with Python versions: 3.7 - 3.10
-- add pyyaml packaging requirement
+* CI tests with Python versions: 3.7 - 3.10
+* add pyyaml packaging requirement
 
 ### 0.0.1
 
 2022-07-26
 
-- Package renamed as `murky` (formerly `condatools`, `boiga`, and `water_moccasin`).
+* Package renamed as `murky` (formerly `condatools`, `boiga`, and `water_moccasin`).
