@@ -62,18 +62,6 @@ def findGitConfigFile(path=None):
     )
 
 
-def _parse_git_url(url):
-    """
-    Return (organization, repository) tuple from url line of .git/config file.
-
-    Called from 'getRepositoryInfo()'.
-    """
-    if url.startswith("git@"):  # deal with git@github.com:org/repo.git
-        url = url.split(":")[1]
-    org, repo = url.rstrip(".git").split("/")[-2:]
-    return org, repo
-
-
 def getRepositoryInfo(path=None):
     """
     Return (organization, repository) tuple from .git/config file.
@@ -87,8 +75,7 @@ def getRepositoryInfo(path=None):
     for section in parser.sections():
         if not section.startswith("remote"):
             continue
-        url = parser[section].get("url")
-        info = urllib.parse.urlparse(url)  # OK if url is None
+        info = urllib.parse.urlparse(parser[section].get("url"))  # OK if url is None
         if info.path.startswith("git@github.com:"):  # git@github.com:org/repo.git
             org, repo = info.path.rstrip(".git").split(":")[-1].split("/")
             return org, repo
