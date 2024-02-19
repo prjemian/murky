@@ -71,7 +71,7 @@ def getRepositoryInfo(path=None):
     parser = configparser.ConfigParser()
     parser.read(findGitConfigFile(path))
 
-    # Look for a github remote (pick the first one found, if multiple).
+    # Pick the first remote with a URL supplying a github org & repo.
     for section in parser.sections():
         if not section.startswith("remote"):
             continue
