@@ -6,6 +6,14 @@ update_copyright_date
 
 Update the copyright date in all (project) text files.
 
+Show the updated copyright ynotices in the `murky` package::
+
+    update_copyright_date -dv /path/to/source/murky "Pete R. Jemian"
+
+Make the changes::
+
+    update_copyright_date -v /path/to/source/murky "Pete R. Jemian"
+
 Motivation
 ==========
 
